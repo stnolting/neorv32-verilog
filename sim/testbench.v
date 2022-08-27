@@ -1,6 +1,9 @@
 // simple testbench to check the default NEORV32 Verilog wrapper
 // checks for the initial UARt output of the bootloader: "NEORV32"
 
+// by Stephan Nolting, BSD 3-Clause License
+// https://github.com/stnolting/neorv32-verilog
+
 `timescale 1 ns/100 ps  // time-unit = 1 ns, precision = 100 ps
 
 module neorv32_verilog_tb;
@@ -18,8 +21,9 @@ module neorv32_verilog_tb;
     #50; // active reset for 50 * timescale = 50 ns
     nrst = 1;
     #10_000_000;
-    $display("Simulation terminated.");
-    $finish;
+    // if we reach this the simulation has failed
+    $display("Simulation terminated!");
+    $finish; // terminate
   end
 
   // clock generator
@@ -47,7 +51,7 @@ module neorv32_verilog_tb;
     .valid_o(char_valid)
   );
 
-  // check UART output
+  // buffer the processor's UART data in a small FIFO
   reg [7:0] char_buffer [0:6];
   integer i;
 
@@ -59,7 +63,8 @@ module neorv32_verilog_tb;
       end
       char_buffer[6] <= char_data;
     end
-    // check for result string
+    // check for result string: "NEORV32" is sent by the default bootloader
+    // right after reset
     if ((char_buffer[0] == "N") &&
         (char_buffer[1] == "E") &&
         (char_buffer[2] == "O") &&
@@ -67,9 +72,10 @@ module neorv32_verilog_tb;
         (char_buffer[4] == "V") &&
         (char_buffer[5] == "3") &&
         (char_buffer[6] == "2")) begin
+      // simulation was successful
       $display (""); // line break
       $display("Simulation successful!");
-      $finish;
+      $finish; // terminate
     end
   end
 

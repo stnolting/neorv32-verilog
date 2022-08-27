@@ -1,6 +1,9 @@
 // Simulation UART receiver
-// Outputs printable characters to the simulator console; uses Linux-style linebreak
+// Outputs printable characters to the simulator console; uses Linux-style linebreaks
 // Character data is also returned to the top entity for further processing
+
+// by Stephan Nolting, BSD 3-Clause License
+// https://github.com/stnolting/neorv32-verilog
 
 module uart_sim_receiver
 #(
