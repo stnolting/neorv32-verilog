@@ -1,4 +1,4 @@
-name: 'neorv32-verilog verification'
+name: 'Verification'
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  Verification:
+  Check:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,6 @@ jobs:
     - name: '📦 Install GHDL'
       uses: ghdl/setup-ghdl-ci@nightly
 
-    - name: '🚀 Run check script'
+    - name: '🚀 Run verification script'
       run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
 
