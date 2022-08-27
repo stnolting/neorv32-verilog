@@ -1,0 +1,10 @@
+version: 2
+updates:
+- package-ecosystem: gitsubmodule
+  directory: /
+  commit-message:
+    prefix: '[Dependabot]'
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 99
