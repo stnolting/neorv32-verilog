@@ -13,7 +13,7 @@ written in platform-independent **VHDL**, into a plain and synthesizable **Veril
 [GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The resulting Verilog module can be instantiated within an
 all-Verilog designs and can be simulated and synthesized - tested with Xilinx Vivado.
 
-:heavy_check_mark: The [verification workflow]https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
+:heavy_check_mark: The [verification workflow](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
 converts a pre-configured setup of latest processor version into a Verilog netlist and tests the result by running
 an [Icarus Verilog](https://github.com/steveicarus/iverilog) simulation.
 
@@ -43,15 +43,15 @@ GHDL is free software, covered by the GNU General Public License.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-4. Detailed information regarding GHDL's synthesis feature can be in the documentation:
-[https://ghdl.github.io/ghdl/using/Synthesis.html](https://ghdl.github.io/ghdl/using/Synthesis.html)
+:books: Detailed information regarding GHDL's synthesis feature can be in the
+[GHDL synthesis documenation](https://ghdl.github.io/ghdl/using/Synthesis.html).
 
 [[back to top](#NEORV32-in-Verilog)]
 
 
 ## Configuration and Conversion
 
-**:construction: under construction :construction:
+**:construction: WORK IN PROGRESS :construction:**
 
 [[back to top](#NEORV32-in-Verilog)]
 
@@ -62,16 +62,24 @@ This repository provides a simple [Verilog testbench](https://github.com/stnolti
 that can be used to simulate the default NEORV32 configuration. The testbench includes a UART receiver, which is driven by the
 processor UART0. It outputs received characters to the simulator console.
 
-A pre-configured [simulation script](https://github.com/stnolting/neorv32-verilog/blob/main/sim/iverilog_sim.sh)
-that is based on [Icarus Verilog](https://github.com/steveicarus/iverilog) can be used to simulate the Verilog setup
-(takes several minutes to complete):
+A pre-configured simulation script based on [Icarus Verilog](https://github.com/steveicarus/iverilog) can be used to simulate
+the Verilog setup (takes several minutes to complete):
 
 ```bash
 neorv32-verilog/sim$ sh iverilog_sim.sh
+neorv32-verilog testbench
 
+
+
+
+<< NEORV32
+Simulation successful!
+./testbench.v:72: $finish called at 97188150 (100ps)
 ```
 
-The simulation is terminated automatically as soon as the string "`NEORV32`" has been received from the processor's bootloader.
+The simulation is terminated automatically as soon as the string "`NEORV32`" has been received from the processor's bootloader
+and "Simulation successful!" is printed to the console. If `Simulation terminated!` appears in the simulator console the simulation
+has failed.
 
 :bulb: Prebuilt Icarus Verilog binaries for Linux can be downloaded from
 [github.com/stnolting/icarus-verilog-prebuilt](https://github.com/stnolting/icarus-verilog-prebuilt).
