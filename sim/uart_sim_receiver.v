@@ -14,9 +14,10 @@ module uart_sim_receiver
   input  wire       clk_i,  // clock input, triggering on rising edge
   input  wire       txd_i,  // UART transmit data
   output wire [7:0] data_o, // character data
-  output wire       valid_o // character data valid whens et
+  output wire       valid_o // character data valid when set
 );
 
+  // duration of a single bit
   localparam UART_BAUD_VAL = CLOCK_FREQ / BAUD_RATE;
 
   reg     [4:0] uart_rx_sync; // synchronizer shift register
@@ -26,6 +27,7 @@ module uart_sim_receiver
   integer       uart_rx_bitcnt; // bit counter: 8 data bits, 1 start bit
   wire    [7:0] char = uart_rx_sreg[8:1]; // character data
 
+  // initialize because we don't have a real reset
   initial begin
     uart_rx_sync = 5'b11111;
     uart_rx_busy = 1'b0;
@@ -75,4 +77,4 @@ module uart_sim_receiver
   assign data_o = char; // character data
   assign valid_o = ((uart_rx_baud_cnt == 0) && (uart_rx_bitcnt == 0)) ? 1'b1 : 1'b0; // character valid
 
-endmodule
+endmodule // uart_sim_receiver
