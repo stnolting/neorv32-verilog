@@ -1,0 +1,7 @@
+# simulation artifacts
+sim/neorv32-verilog-sim
+.github/sim_log
+
+# GHDL artifacts
+src/build
+src/*.v
