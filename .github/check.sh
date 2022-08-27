@@ -13,7 +13,7 @@ echo ">> neorv32-verilog verification script"
 echo ">> Checking NEORV32 version..."
 grep -rni "$RTL_FOLDER"/core/neorv32_package.vhd -e 'hw_version_c'
 
-echo ">> Generating Verilog netlist..."
+echo ">> Generating Verilog..."
 sh "$SRC_FOLDER"/convert.sh
 
 echo ">> Starting simulation..."
