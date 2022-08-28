@@ -144,18 +144,18 @@ Prebuilt Icarus Verilog binaries for Linux can be downloaded from
 ## Evaluation
 
 It's time for a "quality" evaluation of the auto-generated Verilog. Therefore,
-two projects were created: a pure Verilog one using the auto-generated `neorv32_verilog_wrapper.v` file and a
-pure VHDL one using the provided `neorv32_verilog_wrapper.vhd` file. For both projects a simple top entity was
+two projects were created: a pure Verilog one using the auto-generated `src/neorv32_verilog_wrapper.v` file and a
+pure VHDL one using the provided `src/neorv32_verilog_wrapper.vhd` file. For both projects a simple top entity was
 created (again, a Verilog and a VHDL version) that instantiate the according `neorv32_verilog_wrapper` module
 together with a PLL for providing clock (100MHz) and reset.
 
-The default configuration of the `neorv32_verilog_wrapper` were used:
+The default configuration of the wrapper was used:
 
 * Memories: 16kB IMEM (RAM), 8kB DMEM (RAM), 4kB internal bootloader ROM
 * CPU: `rv32imc_Zicsr_Zicntr`
 * Peripherals: UART0, GPIO, MTIME
 
-Both setups were synthesized for an Intel Cyclone IV E FPGA (`EP4CE22F17C6`) using Intel Quartus Prime 21.1.0
+Both setups were synthesized for an Intel Cyclone IV E FPGA (EP4CE22F17C6) using Intel Quartus Prime 21.1.0
 with default settings ("balanced" implementation). The timing analyzer's "Slow 1200mV 0C Model" was used to
 evaluate the maximum operating frequency f_max. Additionally, both setups were (successfully! :tada:) tested
 on a Terasic DE0-nano FPGA board.
