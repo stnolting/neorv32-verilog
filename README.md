@@ -10,11 +10,11 @@
 4. [Simulation](#Simulation)
 5. [Evaluation](#Evaluation)
 
-This repository shows how to convert the [NEORV32 RISC-V Processor](https://github.com/stnolting/neorv32), which is
-written in platform-independent **VHDL**, into a plain and synthesizable **Verilog netlist module** using
-[GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The resulting Verilog module can be instantiated into an
-all-Verilog design and can be successfully simulated and synthesized - tested with Xilinx Vivado and Intel Quartus
-(see section [Evaluation](#Evaluation)).
+This repository shows how to convert a complex **VHDL** design into a synthesizable plain **Verilog netlist module** using
+[GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The example in this repository is based on the
+[NEORV32 RISC-V Processor](https://github.com/stnolting/neorv32), which is written in _platform-independent_ VHDL.
+The resulting Verilog module can be instantiated within an all-Verilog design and can be successfully simulated and
+synthesized - tested with Xilinx Vivado and Intel Quartus (see section [Evaluation](#Evaluation)).
 
 :books: Detailed information regarding GHDL's synthesis feature can be found in the
 [GHDL synthesis documentation](https://ghdl.github.io/ghdl/using/Synthesis.html).
