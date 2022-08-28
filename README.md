@@ -55,7 +55,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 GHDL `synth` option is used to convert the whole NEORV32 processor - including all peripherals, memories
 and memory images - into a single Verilog netlist module file.
 
-The output of the GHDL synthesis is a _post-elaboration_ result. Therefore, all the processor's configuration
+:warning: The output of the GHDL synthesis is a _post-elaboration_ result. Therefore, all the processor's configuration
 options (i.e. VHDL generics) are resolved _before_ the actual output is generated (see the GHDL
 [internals documentation](http://ghdl.github.io/ghdl/internals/index.html)).
 
@@ -63,7 +63,7 @@ To ease configuration and customization a minimal VHDL wrapper
 [`src/neorv32_verilog_wrapper.vhd`](https://github.com/stnolting/neorv32-verilog/blob/main/src/neorv32_verilog_wrapper.vhd)
 is provided. This wrapper can be used to configure the processor setup according to the requirements.
 The default wrapper from this repository only implements a minimal subset of the available configuration options
-and interfaces - just enough to run the built-in bootloader.
+and interfaces - just enough to run the processor's built-in bootloader.
 
 Have a look at the original [processor top entity (`neorv32_top.vhd`)](https://github.com/stnolting/neorv32/blob/main/rtl/core/neorv32_top.vhd)
 and just copy the generics and interfaces that you would like to use for the Verilog setup.
