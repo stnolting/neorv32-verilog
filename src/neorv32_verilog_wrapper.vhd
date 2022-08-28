@@ -32,7 +32,6 @@ begin
     CPU_EXTENSION_RISCV_M        => true,      -- implement mul/div extension?
     CPU_EXTENSION_RISCV_Zicsr    => true,      -- implement CSR system?
     CPU_EXTENSION_RISCV_Zicntr   => true,      -- implement base counters?
-    CPU_EXTENSION_RISCV_Zifencei => true,      -- implement instruction stream sync.?
 
     -- Internal Instruction memory (IMEM) --
     MEM_INT_IMEM_EN              => true,      -- implement processor-internal instruction memory
@@ -45,9 +44,7 @@ begin
     -- Processor peripherals --
     IO_GPIO_EN                   => true,      -- implement general purpose input/output port unit (GPIO)?
     IO_MTIME_EN                  => true,      -- implement machine system timer (MTIME)?
-    IO_UART0_EN                  => true,      -- implement primary universal asynchronous receiver/transmitter (UART0)?
-    IO_UART0_RX_FIFO             => 1,         -- RX fifo depth, has to be a power of two, min 1
-    IO_UART0_TX_FIFO             => 1          -- TX fifo depth, has to be a power of two, min 1
+    IO_UART0_EN                  => true       -- implement primary universal asynchronous receiver/transmitter (UART0)?
   )
   port map (
     -- Global control --
