@@ -8,13 +8,13 @@
 2. [Configuration](#Configuration)
 3. [Conversion](#Conversion)
 4. [Simulation](#Simulation)
-5. [Synthesis](#Synthesis)
+5. [Evaluation](#Evaluation)
 
 This repository shows how to convert the [NEORV32 RISC-V Processor](https://github.com/stnolting/neorv32), which is
 written in platform-independent **VHDL**, into a plain and synthesizable **Verilog netlist module** using
 [GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The resulting Verilog module can be instantiated into an
-all-Verilog design and can be successfully simulated and synthesized - both tested with Xilinx Vivado
-(see section [Synthesis](#Synthesis)).
+all-Verilog design and can be successfully simulated and synthesized - tested with Xilinx Vivado and Intel Quartus
+(see section [Evaluation](#Evaluation)).
 
 :books: Detailed information regarding GHDL's synthesis feature can be found in the
 [GHDL synthesis documentation](https://ghdl.github.io/ghdl/using/Synthesis.html).
@@ -141,10 +141,38 @@ Prebuilt Icarus Verilog binaries for Linux can be downloaded from
 [[back to top](#NEORV32-in-Verilog)]
 
 
-## Synthesis
+## Evaluation
 
-**:construction: under construction**
+It's time for a "quality" evaluation of the auto-generated Verilog. Therefore,
+two projects were created: a pure Verilog one using the auto-generated `neorv32_verilog_wrapper.v` file and a
+pure VHDL one using the provided `neorv32_verilog_wrapper.vhd` file. For both projects a simple top entity was
+created (again, a Verilog and a VHDL version) that instantiate the according `neorv32_verilog_wrapper` module
+together with a PLL for providing clock (100MHz) and reset.
 
-work in progress: compare (and test!) synthesis results - plain VHDL vs. plain Verilog
+The default configuration of the `neorv32_verilog_wrapper` were used:
+
+* Memories: 16kB IMEM (RAM), 8kB DMEM (RAM), 4kB internal bootloader ROM
+* CPU: `rv32imc_Zicsr_Zicntr`
+* Peripherals: UART0, GPIO, MTIME
+
+Both setups were synthesized for an Intel Cyclone IV E FPGA (`EP4CE22F17C6`) using Intel Quartus Prime 21.1.0
+with default settings ("balanced" implementation). The timing analyzer's "Slow 1200mV 0C Model" was used to
+evaluate the maximum operating frequency f_max. Additionally, both setups were (successfully! :tada:) tested
+on a Terasic DE0-nano FPGA board.
+
+|                      | All-Verilog | All-VHDL |
+|:---------------------|:-----------:|:--------:|
+| Total logic elements | 3697        | 3287     |
+| Total registers      | 1436        | 1450     |
+| Total pins           | 4           | 4        |
+| Total memory bits    | 230400      | 230400   |
+| Embedded multiplier  | 0           | 0        |
+| Total PLLs           | 1           | 1        |
+| f_max [MHz]          | 115.3       | 122.2    |
+| Operational          | yes         | yes      |
+
+Not bad at all! Maybe the Verilog implementation result could be further improved by turning on more advanced
+synthesis/optimization options. Also, the coding style of the VHDL code base might not be optimal resulting in
+a less-good netlist.
 
 [[back to top](#NEORV32-in-Verilog)]
