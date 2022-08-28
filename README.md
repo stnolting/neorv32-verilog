@@ -8,17 +8,19 @@
 2. [Configuration](#Configuration)
 3. [Conversion](#Conversion)
 4. [Simulation](#Simulation)
+5. [Synthesis](#Synthesis)
 
 This repository shows how to convert the [NEORV32 RISC-V Processor](https://github.com/stnolting/neorv32), which is
 written in platform-independent **VHDL**, into a plain and synthesizable **Verilog netlist module** using
 [GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The resulting Verilog module can be instantiated into an
-all-Verilog design and can be successfully simulated and synthesized - both tested with Xilinx Vivado.
+all-Verilog design and can be successfully simulated and synthesized - both tested with Xilinx Vivado
+(see section [Synthesis](#Synthesis)).
 
 :books: Detailed information regarding GHDL's synthesis feature can be found in the
 [GHDL synthesis documentation](https://ghdl.github.io/ghdl/using/Synthesis.html).
 
 :heavy_check_mark: The [verification workflow](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
-converts a pre-configured setup of latest processor version into a Verilog netlist and tests the result by running
+converts a pre-configured setup of the latest NEORV32 version into a Verilog netlist and tests the result by running
 an [Icarus Verilog](https://github.com/steveicarus/iverilog) simulation.
 
 
@@ -66,8 +68,8 @@ The default wrapper from this repository only implements a minimal subset of the
 and interfaces - just enough to run the processor's built-in bootloader.
 
 Have a look at the original [processor top entity (`neorv32_top.vhd`)](https://github.com/stnolting/neorv32/blob/main/rtl/core/neorv32_top.vhd)
-and just copy the generics and interfaces that you would like to use for the Verilog setup.
-Note that all NEORV32 interface inputs and configuration generics do provide default values.
+and just copy the generics and ports that you would like to use for the Verilog setup.
+Note that all NEORV32 interface inputs and configuration generics do provide _default values_.
 
 [[back to top](#NEORV32-in-Verilog)]
 
@@ -135,5 +137,14 @@ has failed.
 \
 Prebuilt Icarus Verilog binaries for Linux can be downloaded from
 [stnolting/icarus-verilog-prebuilt](https://github.com/stnolting/icarus-verilog-prebuilt).
+
+[[back to top](#NEORV32-in-Verilog)]
+
+
+## Synthesis
+
+**:construction: under construction**
+
+work in progress: compare (and test!) synthesis results - plain VHDL vs. plain Verilog
 
 [[back to top](#NEORV32-in-Verilog)]
