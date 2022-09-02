@@ -40,6 +40,7 @@ ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_icach
 ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_imem.entity.vhd
 ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_mtime.vhd
 ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_neoled.vhd
+ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_onewire.vhd
 ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_pwm.vhd
 ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_slink.vhd
 ghdl -a --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/neorv32_spi.vhd
