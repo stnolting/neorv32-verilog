@@ -1,4 +1,4 @@
-name: 'Verification'
+name: 'neorv32-verilog check'
 
 on:
   push:
