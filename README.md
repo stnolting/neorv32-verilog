@@ -2,7 +2,7 @@
 
 [![neorv32-verilog](https://img.shields.io/github/workflow/status/stnolting/neorv32-verilog/neorv32-verilog%20check/main?longCache=true&style=flat-square&label=neorv32-verilog%20check&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
 [![License](https://img.shields.io/github/license/stnolting/neorv32-verilog?longCache=true&style=flat-square&label=License)](https://github.com/stnolting/neorv32-verilog/blob/main/LICENSE)
-[![Gitter](https://img.shields.io/badge/Chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef)](https://gitter.im/neorv32/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://img.shields.io/badge/Chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef)](https://gitter.im/neorv32/community)
 
 1. [Prerequisites](#Prerequisites)
 2. [Configuration](#Configuration)
@@ -160,7 +160,7 @@ with default settings ("balanced" implementation). The timing analyzer's "Slow 1
 evaluate the maximum operating frequency f_max. Additionally, both setups were (successfully! :tada:) tested
 on a Terasic DE0-nano FPGA board.
 
-|                      | All-Verilog | All-VHDL |
+| NEORV32 [v1.7.6.0](https://github.com/stnolting/neorv32/blob/main/CHANGELOG.md) | All-Verilog | All-VHDL |
 |:---------------------|:-----------:|:--------:|
 | Total logic elements | 3697        | 3287     |
 | Total registers      | 1436        | 1450     |
