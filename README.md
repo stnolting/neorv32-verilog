@@ -29,13 +29,15 @@ an [Icarus Verilog](https://github.com/steveicarus/iverilog) simulation.
 1. Clone this repository recursively to include the NEORV32 submodule.
 
 2. Install GHDL. On a Linux machine GHDL can be installed easily via the package manager.
-Make sure to install a version with `--synth` option enabled (should be enabled by default).
+:warning: **Make sure to install a version with `--synth` option enabled (should be enabled by default).
+GHDL version 3.0.0 or higher is required.**
 
 ```
 $ sudo apt-get install ghdl
 ```
 
-3. Test the GHDL installation.
+
+3. Test the GHDL installation and check the version.
 
 ```
 $ ghdl -v
