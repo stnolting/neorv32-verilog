@@ -9,6 +9,12 @@ SRC_FOLDER=${SRC_FOLDER:-.}
 
 mkdir -p build
 
+# show NEORV32 version
+echo "NEORV32 Version:"
+grep -rni "$NEORV32_RTL"/core/neorv32_package.vhd -e 'hw_version_c'
+echo ""
+sleep 2
+
 # Import sources
 ghdl -i --std=08 --work=neorv32 --workdir=build -Pbuild \
   "$NEORV32_RTL"/core/*.vhd \
