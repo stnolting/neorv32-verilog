@@ -169,7 +169,6 @@ on a Terasic DE0-nano FPGA board.
 | Total pins           | 4           | 4        |
 | Total memory bits    | 230400      | 230400   |
 | Embedded multiplier  | 0           | 0        |
-| Total PLLs           | 1           | 1        |
 | f_max [MHz]          | 115.3       | 122.2    |
 | Operational          | yes         | yes      |
 
