@@ -35,7 +35,7 @@ jobs:
     - name: '🚀 Run verification script'
       run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
 
-    - name: '📤 Archive test report'
+    - name: '📤 Archive generated Verilog code'
       uses: actions/upload-artifact@v3
       with:
         name: neorv32_verilog_code
