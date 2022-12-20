@@ -23,6 +23,9 @@ synthesized - tested with Xilinx Vivado and Intel Quartus (see section [Evaluati
 converts a pre-configured setup of the latest NEORV32 version into a Verilog netlist and tests the result by running
 an [Icarus Verilog](https://github.com/steveicarus/iverilog) simulation.
 
+:bulb: The generated Verilog code for the default NEORV32 test configuration can be downloaded as
+[CI Workflow artifact](https://github.com/stnolting/neorv32-verilog/actions).
+
 
 ## Prerequisites
 
