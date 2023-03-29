@@ -13,7 +13,6 @@ module neorv32_verilog_tb;
   wire [7:0] char_data; // character detected by the UART receiver
   wire char_valid; // valid character
 
-
   // generator setup - "executed" only once
   initial begin
     $display ("neorv32-verilog testbench\n");
@@ -27,36 +26,32 @@ module neorv32_verilog_tb;
     $finish; // terminate
   end
 
-
   // clock generator
   always begin
     #5 clk = !clk; // T = 2*5ns -> f = 100MHz
   end
 
-
   // unit under test: minimal NEORV32 Verilog wrapper
   // note that there are NO parameters available - the configuration has to be done
   // in the NEORV32 VHDL wrapper *before* synthesizing the Verilog netlist
-  neorv32_verilog_wrapper uut(
-  .clk_i(clk),
-  .rstn_i(nrst),
-  .uart0_rxd_i(1'b0),
-  .uart0_txd_o(uart_txd)
+  neorv32_verilog_wrapper neorv32_verilog_inst(
+    .clk_i(clk),
+    .rstn_i(nrst),
+    .uart0_rxd_i(1'b0),
+    .uart0_txd_o(uart_txd)
   );
-
 
   // simulation UART receiver - outputs all received characters to the simulator console
   uart_sim_receiver #(
-    .BAUD_RATE(19200),     // default baud rate of the NEORV32 bootloader
-    .CLOCK_FREQ(100000000) // clock frequency of the core - has to be sync to the VHDL configuration wrapper!
+    .CLOCK_FREQ(100000000), // clock frequency of the core
+    .BAUD_RATE(19200)       // default baud rate of the NEORV32 bootloader
   )
-  uart_receiver(
+  uart_sim_receiver_inst(
     .clk_i(clk),
     .txd_i(uart_txd),
     .data_o(char_data),
     .valid_o(char_valid)
   );
-
 
   // buffer the processor's UART data in a small FIFO-like queue
   reg [7:0] char_buffer [0:6];
@@ -71,8 +66,7 @@ module neorv32_verilog_tb;
       end
       char_buffer[6] <= char_data;
     end
-    // check for result string: "NEORV32" is sent by the default bootloader
-    // right after reset
+    // check for result string: "NEORV32" is sent by the default bootloader right after reset
     if ((char_buffer[0] == "N") &&
         (char_buffer[1] == "E") &&
         (char_buffer[2] == "O") &&
@@ -87,4 +81,4 @@ module neorv32_verilog_tb;
     end
   end
 
-endmodule // neorv32_verilog_tb
+endmodule

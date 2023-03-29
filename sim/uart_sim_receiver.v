@@ -1,5 +1,5 @@
 // Simulation UART receiver
-// Outputs printable characters to the simulator console; uses Linux-style linebreaks
+// Outputs printable characters to the simulator console; uses Linux-style line breaks
 // Character data is also returned to the top entity for further processing
 
 // by Stephan Nolting, BSD 3-Clause License
@@ -7,8 +7,8 @@
 
 module uart_sim_receiver
 #(
-  parameter BAUD_RATE  = 19200,    // target baud rate
-  parameter CLOCK_FREQ = 100000000 // clock frequency of <clk_i> in Hz
+  parameter CLOCK_FREQ = 100000000, // clock frequency of <clk_i> in Hz
+  parameter BAUD_RATE  = 19200      // target baud rate
 )
 (
   input  wire       clk_i,  // clock input, triggering on rising edge
