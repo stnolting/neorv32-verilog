@@ -19,27 +19,26 @@ architecture neorv32_verilog_wrapper_rtl of neorv32_verilog_wrapper is
 
 begin
 
-  -- The Core Of The Problem ----------------------------------------------------------------
-  -- -------------------------------------------------------------------------------------------
   neorv32_top_inst: neorv32_top
   generic map (
     -- General --
-    CLOCK_FREQUENCY            => 100000000, -- clock frequency of clk_i in Hz
-    INT_BOOTLOADER_EN          => true,      -- boot configuration: true = boot explicit bootloader; false = boot from int/ext (I)MEM
+    CLOCK_FREQUENCY            => 100_000_000, -- clock frequency of clk_i in Hz
+    INT_BOOTLOADER_EN          => true,        -- boot configuration: boot explicit bootloader
     -- RISC-V CPU Extensions --
-    CPU_EXTENSION_RISCV_C      => true,      -- implement compressed extension?
-    CPU_EXTENSION_RISCV_M      => true,      -- implement mul/div extension?
-    CPU_EXTENSION_RISCV_Zicsr  => true,      -- implement CSR system?
-    CPU_EXTENSION_RISCV_Zicntr => true,      -- implement base counters?
+    CPU_EXTENSION_RISCV_C      => true,        -- implement compressed extension?
+    CPU_EXTENSION_RISCV_M      => true,        -- implement mul/div extension?
+    CPU_EXTENSION_RISCV_Zicntr => true,        -- implement base counters?
     -- Internal Instruction memory (IMEM) --
-    MEM_INT_IMEM_EN            => true,      -- implement processor-internal instruction memory
-    MEM_INT_IMEM_SIZE          => 16*1024,   -- size of processor-internal instruction memory in bytes
+    MEM_INT_IMEM_EN            => true,        -- implement processor-internal instruction memory
+    MEM_INT_IMEM_SIZE          => 16*1024,     -- size of processor-internal instruction memory in bytes
     -- Internal Data memory (DMEM) --
-    MEM_INT_DMEM_EN            => true,      -- implement processor-internal data memory
-    MEM_INT_DMEM_SIZE          => 8*1024,    -- size of processor-internal data memory in bytes
+    MEM_INT_DMEM_EN            => true,        -- implement processor-internal data memory
+    MEM_INT_DMEM_SIZE          => 8*1024,      -- size of processor-internal data memory in bytes
     -- Processor peripherals --
-    IO_MTIME_EN                => true,      -- implement machine system timer (MTIME)?
-    IO_UART0_EN                => true       -- implement primary universal asynchronous receiver/transmitter (UART0)?
+    IO_MTIME_EN                => true,        -- implement machine system timer (MTIME)?
+    IO_UART0_EN                => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
+    IO_UART0_RX_FIFO           => 256,         -- RX fifo depth, has to be a power of two, min 1
+    IO_UART0_TX_FIFO           => 256          -- TX fifo depth, has to be a power of two, min 1
   )
   port map (
     -- Global control --
