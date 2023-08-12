@@ -37,8 +37,8 @@ begin
     -- Processor peripherals --
     IO_MTIME_EN                => true,        -- implement machine system timer (MTIME)?
     IO_UART0_EN                => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
-    IO_UART0_RX_FIFO           => 256,         -- RX fifo depth, has to be a power of two, min 1
-    IO_UART0_TX_FIFO           => 256          -- TX fifo depth, has to be a power of two, min 1
+    IO_UART0_RX_FIFO           => 64,          -- RX fifo depth, has to be a power of two, min 1
+    IO_UART0_TX_FIFO           => 64           -- TX fifo depth, has to be a power of two, min 1
   )
   port map (
     -- Global control --
