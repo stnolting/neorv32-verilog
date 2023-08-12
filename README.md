@@ -4,17 +4,17 @@
 [![License](https://img.shields.io/github/license/stnolting/neorv32-verilog?longCache=true&style=flat-square&label=License)](https://github.com/stnolting/neorv32-verilog/blob/main/LICENSE)
 [![Gitter](https://img.shields.io/badge/Chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef)](https://gitter.im/neorv32/community)
 
-1. [Prerequisites](#Prerequisites)
-2. [Configuration](#Configuration)
-3. [Conversion](#Conversion)
-4. [Simulation](#Simulation)
-5. [Evaluation](#Evaluation)
+1. [Prerequisites](#prerequisites)
+2. [Configuration](#configuration)
+3. [Conversion](#conversion)
+4. [Simulation](#simulation)
+5. [Evaluation](#evaluation)
 
 This repository shows how to convert a complex **VHDL** design into a synthesizable plain **Verilog netlist module** using
 [GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The example in this repository is based on the
 [NEORV32 RISC-V Processor](https://github.com/stnolting/neorv32), which is written in _platform-independent_ VHDL.
 The resulting Verilog module can be instantiated within an all-Verilog design and can be successfully simulated and
-synthesized - tested with Xilinx Vivado and Intel Quartus (see section [Evaluation](#Evaluation)).
+synthesized - tested with Xilinx Vivado and Intel Quartus (see section [Evaluation](#evaluation)).
 
 :books: Detailed information regarding GHDL's synthesis feature can be found in the
 [GHDL synthesis documentation](https://ghdl.github.io/ghdl/using/Synthesis.html).
@@ -54,7 +54,7 @@ GHDL is free software, covered by the GNU General Public License.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-[[back to top](#NEORV32-in-Verilog)]
+[[back to top](#neorv32-in-verilog)]
 
 
 ## Configuration
@@ -76,7 +76,7 @@ Have a look at the original [processor top entity (`neorv32_top.vhd`)](https://g
 and just copy the generics and ports that you would like to use for the Verilog setup.
 Note that all NEORV32 interface inputs and configuration generics do provide _default values_.
 
-[[back to top](#NEORV32-in-Verilog)]
+[[back to top](#neorv32-in-verilog)]
 
 
 ## Conversion
@@ -110,7 +110,7 @@ of simulation waveforms and synthesis results.
 * Custom VHDL interface types and records are collapsed into linear arrays. For example, the 8x32-bit interface type `sdata_8x32_t`
 (NEORV32 SLINK interface) is packed into a one-dimensional 8*32=256-bit vector.
 
-[[back to top](#NEORV32-in-Verilog)]
+[[back to top](#neorv32-in-verilog)]
 
 
 ## Simulation
@@ -143,7 +143,7 @@ has failed.
 Prebuilt Icarus Verilog binaries for Linux can be downloaded from
 [stnolting/icarus-verilog-prebuilt](https://github.com/stnolting/icarus-verilog-prebuilt).
 
-[[back to top](#NEORV32-in-Verilog)]
+[[back to top](#neorv32-in-verilog)]
 
 
 ## Evaluation
@@ -179,4 +179,4 @@ Not bad at all! Maybe the Verilog implementation result could be further improve
 synthesis/optimization options. Also, the coding style of the VHDL code base might not be optimal resulting in
 a less-good netlist.
 
-[[back to top](#NEORV32-in-Verilog)]
+[[back to top](#neorv32-in-verilog)]
