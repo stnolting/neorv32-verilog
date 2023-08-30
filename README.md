@@ -59,7 +59,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ## Configuration
 
-GHDL `synth` option is used to convert the whole NEORV32 processor - including all peripherals, memories
+GHDL's `synth` option is used to convert the whole NEORV32 processor - including all peripherals, memories
 and memory images - into a single Verilog netlist module file.
 
 :warning: The output of the GHDL synthesis is a _post-elaboration_ result. Therefore, all the processor's configuration
@@ -107,8 +107,7 @@ However, optimizations will be performed by the synthesis tool (e.g. mapping to 
 * The interface of the resulting NEORV32 Verilog module lists all inputs first followed by all outputs.
 * The original NEORV32 module hierarchy is preserved as well as most (all?) signal names, which allows easy inspection and debugging
 of simulation waveforms and synthesis results.
-* Custom VHDL interface types and records are collapsed into linear arrays. For example, the 8x32-bit interface type `sdata_8x32_t`
-(NEORV32 SLINK interface) is packed into a one-dimensional 8*32=256-bit vector.
+* Custom VHDL interface types and records are collapsed into linear arrays.
 
 [[back to top](#neorv32-in-verilog)]
 
