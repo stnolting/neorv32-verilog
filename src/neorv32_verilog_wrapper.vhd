@@ -9,7 +9,7 @@ entity neorv32_verilog_wrapper is
     -- Global control --
     clk_i       : in  std_ulogic; -- global clock, rising edge
     rstn_i      : in  std_ulogic; -- global reset, low-active, async
-    -- primary UART0 --
+    -- UART0 --
     uart0_txd_o : out std_ulogic; -- UART0 send data
     uart0_rxd_i : in  std_ulogic  -- UART0 receive data
   );

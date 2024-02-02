@@ -31,4 +31,5 @@ ghdl synth --std=08 --work=neorv32 --workdir=build -Pbuild --out=verilog neorv32
 echo ""
 echo "------ neorv32_verilog_wrapper interface ------"
 sed -n "/module neorv32_verilog_wrapper/,/);/p" "$SRC_FOLDER"/neorv32_verilog_wrapper.v
+echo "-----------------------------------------------"
 echo ""

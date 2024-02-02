@@ -83,7 +83,7 @@ Note that all NEORV32 interface inputs and configuration generics do provide _de
 The actual conversion is conducted by a conversion shell script, which analyzes all the processor's sources and finally
 calls GHDL `synth` to create the final Verilog netlist `neorv32-verilog/src/neorv32_verilog_wrapper.v`.
 
-```
+```bash
 neorv32-verilog/src$ sh convert.sh
 ```
 
@@ -97,6 +97,7 @@ module neorv32_verilog_wrapper
    input  rstn_i,
    input  uart0_rxd_i,
    output uart0_txd_o);
+-----------------------------------------------
 ```
 
 ### Notes
@@ -120,21 +121,21 @@ processor UART0. It outputs received characters to the simulator console.
 A pre-configured simulation script based on [Icarus Verilog](https://github.com/steveicarus/iverilog) can be used to simulate
 the Verilog setup (takes several minutes to complete):
 
-```
+```bash
 neorv32-verilog/sim$ sh iverilog_sim.sh
-neorv32-verilog testbench
+neorv32-verilog verification testbench
 
 
 
 
 << NEORV32
 Simulation successful!
-./testbench.v:72: $finish called at 97188150 (100ps)
+./testbench.v:79: $finish called at 95372250 (100ps)
 ```
 
 The simulation is terminated automatically as soon as the string "`NEORV32`" has been received from the processor's bootloader.
-In this case `Simulation successful!` is printed to the console. If `Simulation terminated!` appears in the simulator console the simulation
-has failed.
+In this case `Simulation successful!` is printed to the console. If `Simulation terminated!` appears in the simulator console
+the simulation has failed.
 
 [![Check_iverilog](https://img.shields.io/github/actions/workflow/status/stnolting/icarus-verilog-prebuilt/check_iverilog.yml?branch=main&longCache=true&style=flat&label=Check%20iverilog%20packages&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/icarus-verilog-prebuilt/actions/workflows/check_iverilog.yml)
 \
@@ -155,7 +156,7 @@ together with a PLL for providing clock (100MHz) and reset.
 The default configuration of the wrapper was used:
 
 * Memories: 16kB IMEM (RAM), 8kB DMEM (RAM), 4kB internal bootloader ROM
-* CPU: `rv32imc_Zicsr_Zicntr`
+* CPU: `rv32imc_Zicsr_Zicntr_Zifencei`
 * Peripherals: UART0, GPIO, MTIME
 
 Both setups were synthesized for an Intel Cyclone IV E FPGA (EP4CE22F17C6) using Intel Quartus Prime 21.1.0
