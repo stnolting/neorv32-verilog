@@ -16,7 +16,7 @@ grep -rni "$RTL_FOLDER"/core/neorv32_package.vhd -e 'hw_version_c'
 echo ">> Generating Verilog..."
 sh "$SRC_FOLDER"/convert.sh
 
-echo ">> Starting simulation..."
+echo ">> Running simulation..."
 touch sim_log
 sh "$SIM_FOLDER"/iverilog_sim.sh > sim_log
 
