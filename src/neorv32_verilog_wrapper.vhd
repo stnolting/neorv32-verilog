@@ -5,7 +5,7 @@ library neorv32;
 use neorv32.neorv32_package.all;
 
 entity neorv32_verilog_wrapper is
-  port (
+  port ( -- ADD PORTS AS REQUIRED
     -- Global control --
     clk_i       : in  std_ulogic; -- global clock, rising edge
     rstn_i      : in  std_ulogic; -- global reset, low-active, async
@@ -19,15 +19,33 @@ architecture neorv32_verilog_wrapper_rtl of neorv32_verilog_wrapper is
 
 begin
 
+  -- The core of the problem ----------------------------------------------------------------
+  -- -------------------------------------------------------------------------------------------
   neorv32_top_inst: neorv32_top
-  generic map (
+  generic map ( -- ADD CONFIGURATION OPTIONS AS REQUIRED
     -- General --
     CLOCK_FREQUENCY            => 100_000_000, -- clock frequency of clk_i in Hz
     INT_BOOTLOADER_EN          => true,        -- boot configuration: boot explicit bootloader
     -- RISC-V CPU Extensions --
+    CPU_EXTENSION_RISCV_A      => true,        -- implement atomic memory operations extension?
     CPU_EXTENSION_RISCV_C      => true,        -- implement compressed extension?
     CPU_EXTENSION_RISCV_M      => true,        -- implement mul/div extension?
+    CPU_EXTENSION_RISCV_U      => true,        -- implement user mode extension?
+    CPU_EXTENSION_RISCV_Zfinx  => true,        -- implement 32-bit floating-point extension (using INT regs!)
     CPU_EXTENSION_RISCV_Zicntr => true,        -- implement base counters?
+    CPU_EXTENSION_RISCV_Zicond => true,        -- implement integer conditional operations?
+    CPU_EXTENSION_RISCV_Zihpm  => true,        -- implement hardware performance monitors?
+    -- Tuning Options --
+    FAST_MUL_EN                => true,        -- use DSPs for M extension's multiplier
+    FAST_SHIFT_EN              => true,        -- use barrel shifter for shift operations
+    -- Physical Memory Protection (PMP) --
+    PMP_NUM_REGIONS            => 4,           -- number of regions (0..16)
+    PMP_MIN_GRANULARITY        => 4,           -- minimal region granularity in bytes, has to be a power of 2, min 4 bytes
+    -- Hardware Performance Monitors (HPM) --
+    HPM_NUM_CNTS               => 10,          -- number of implemented HPM counters (0..13)
+    HPM_CNT_WIDTH              => 40,          -- total size of HPM counters (0..64)
+    -- Atomic Memory Access - Reservation Set Granularity --
+    AMO_RVS_GRANULARITY        => 4,           -- size in bytes, has to be a power of 2, min 4
     -- Internal Instruction memory (IMEM) --
     MEM_INT_IMEM_EN            => true,        -- implement processor-internal instruction memory
     MEM_INT_IMEM_SIZE          => 16*1024,     -- size of processor-internal instruction memory in bytes
@@ -40,7 +58,7 @@ begin
     IO_UART0_RX_FIFO           => 64,          -- RX fifo depth, has to be a power of two, min 1
     IO_UART0_TX_FIFO           => 64           -- TX fifo depth, has to be a power of two, min 1
   )
-  port map (
+  port map ( -- ADD PORTS AS REQUIRED
     -- Global control --
     clk_i       => clk_i,       -- global clock, rising edge
     rstn_i      => rstn_i,      -- global reset, low-active, async
