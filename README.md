@@ -15,14 +15,14 @@ This repository shows how to convert a complex **VHDL** design into a synthesiza
 The resulting Verilog module can be instantiated within an all-Verilog design and can be successfully simulated and
 synthesized - tested with Xilinx Vivado and Intel Quartus (see section [Evaluation](#evaluation)).
 
-:books: Detailed information regarding GHDL's synthesis feature can be found in the
+Detailed information regarding GHDL's synthesis feature can be found in the
 [GHDL synthesis documentation](https://ghdl.github.io/ghdl/using/Synthesis.html).
 
-:heavy_check_mark: The [verification workflow](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
+> [!NOTE]
+> The [verification workflow](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
 converts a pre-configured setup of the latest NEORV32 version into a Verilog netlist and tests the result by running
 an [Icarus Verilog](https://github.com/steveicarus/iverilog) simulation.
-
-:bulb: The generated Verilog code for the default NEORV32 test configuration can be downloaded as
+The generated Verilog code for the default processor configuration can be downloaded as
 [CI Workflow artifact](https://github.com/stnolting/neorv32-verilog/actions).
 
 
@@ -61,7 +61,8 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 GHDL's `synth` option is used to convert the whole NEORV32 processor - including all peripherals, memories
 and memory images - into a single Verilog netlist module file.
 
-:warning: The output of the GHDL synthesis is a _post-elaboration_ result. Therefore, all the processor's configuration
+> [!WARNING]
+> The output of the GHDL synthesis is a _post-elaboration_ result. Therefore, all the processor's configuration
 options (i.e. VHDL generics) are resolved _before_ the actual output is generated (see the GHDL
 [internals documentation](http://ghdl.github.io/ghdl/internals/index.html)).
 
