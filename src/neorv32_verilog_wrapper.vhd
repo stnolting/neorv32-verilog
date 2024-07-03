@@ -44,8 +44,6 @@ begin
     -- Hardware Performance Monitors (HPM) --
     HPM_NUM_CNTS               => 10,          -- number of implemented HPM counters (0..13)
     HPM_CNT_WIDTH              => 40,          -- total size of HPM counters (0..64)
-    -- Atomic Memory Access - Reservation Set Granularity --
-    AMO_RVS_GRANULARITY        => 4,           -- size in bytes, has to be a power of 2, min 4
     -- Internal Instruction memory (IMEM) --
     MEM_INT_IMEM_EN            => true,        -- implement processor-internal instruction memory
     MEM_INT_IMEM_SIZE          => 16*1024,     -- size of processor-internal instruction memory in bytes
