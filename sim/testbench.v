@@ -33,7 +33,7 @@ module neorv32_verilog_tb;
 
   // unit under test: minimal NEORV32 Verilog wrapper
   // note that there are NO parameters available - the configuration has to be done
-  // in the NEORV32 VHDL wrapper *before* synthesizing the Verilog netlist
+  // in the NEORV32 VHDL wrapper *before* synthesizing the generated Verilog code
   neorv32_verilog_wrapper neorv32_verilog_inst (
     .clk_i       (clk),
     .rstn_i      (nrst),

@@ -9,7 +9,7 @@
 4. [Simulation](#simulation)
 5. [Evaluation](#evaluation)
 
-This repository shows how to convert a complex **VHDL** design into a synthesizable plain **Verilog netlist module** using
+This repository shows how to convert a complex **VHDL** design into a single, synthesizable, **plain-Verilog module** using
 [GHDL's](https://github.com/ghdl/ghdl) synthesis feature. The example in this repository is based on the
 [NEORV32 RISC-V Processor](https://github.com/stnolting/neorv32), which is written in _platform-independent_ VHDL.
 The resulting Verilog module can be instantiated within an all-Verilog design and can be successfully simulated and
@@ -20,7 +20,7 @@ Detailed information regarding GHDL's synthesis feature can be found in the
 
 > [!NOTE]
 > The [verification workflow](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
-converts a pre-configured setup of the latest NEORV32 version into a Verilog netlist and tests the result by running
+converts a pre-configured setup of the latest NEORV32 version to Verilog and tests the result by running
 an [Icarus Verilog](https://github.com/steveicarus/iverilog) simulation.
 The generated Verilog code for the default processor configuration can be downloaded as
 [CI Workflow artifact](https://github.com/stnolting/neorv32-verilog/actions).
@@ -59,7 +59,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ## Configuration
 
 GHDL's `synth` option is used to convert the whole NEORV32 processor - including all peripherals, memories
-and memory images - into a single Verilog netlist module file.
+and memory images - into a single plain-Verilog module file.
 
 > [!WARNING]
 > The output of the GHDL synthesis is a _post-elaboration_ result. Therefore, all the processor's configuration
@@ -82,13 +82,13 @@ Note that all NEORV32 interface inputs and configuration generics do provide _de
 ## Conversion
 
 The actual conversion is conducted by a conversion shell script, which analyzes all the processor's sources and finally
-calls GHDL `synth` to create the final Verilog netlist `neorv32-verilog/src/neorv32_verilog_wrapper.v`.
+calls GHDL `synth` to create the final Verilog code `neorv32-verilog/src/neorv32_verilog_wrapper.v`.
 
 ```bash
 neorv32-verilog/src$ sh convert.sh
 ```
 
-After generating the netlist the interface of the resulting `neorv32_verilog_wrapper` Verilog
+After conversion, the interface of the resulting `neorv32_verilog_wrapper` Verilog
 module is shown in the console. This can be used as instantiation template.
 
 ```
@@ -103,7 +103,7 @@ module neorv32_verilog_wrapper
 
 ### Notes
 
-* GHDL synthesis generates an unoptimized plain Verilog netlist without any (technology-specific) primitives.
+* GHDL synthesis generates an unoptimized plain Verilog code without any (technology-specific) primitives.
 However, optimizations will be performed by the synthesis tool (e.g. mapping to FPGA primitives like block RAMs).
 * The interface of the resulting NEORV32 Verilog module lists all inputs first followed by all outputs.
 * The original NEORV32 module hierarchy is preserved as well as most (all?) signal names, which allows easy inspection and debugging
@@ -174,9 +174,5 @@ on a Terasic DE0-nano FPGA board.
 | Embedded multiplier  | 0           | 0        |
 | f_max [MHz]          | 115.3       | 122.2    |
 | Operational          | yes         | yes      |
-
-Not bad at all! Maybe the Verilog implementation result could be further improved by turning on more advanced
-synthesis/optimization options. Also, the coding style of the VHDL code base might not be optimal resulting in
-a less-good netlist.
 
 [[back to top](#neorv32-in-verilog)]
