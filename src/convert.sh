@@ -16,10 +16,7 @@ echo ""
 sleep 2
 
 # Import sources
-ghdl -i --std=08 --work=neorv32 --workdir=build -Pbuild \
-  "$NEORV32_RTL"/core/*.vhd \
-  "$NEORV32_RTL"/core/mem/*.vhd \
-  "$SRC_FOLDER"/neorv32_verilog_wrapper.vhd
+ghdl -i --std=08 --work=neorv32 --workdir=build -Pbuild "$NEORV32_RTL"/core/*.vhd "$SRC_FOLDER"/neorv32_verilog_wrapper.vhd
 
 # Top entity
 ghdl -m --std=08 --work=neorv32 --workdir=build neorv32_verilog_wrapper
