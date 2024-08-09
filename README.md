@@ -43,12 +43,12 @@ $ sudo apt-get install ghdl
 
 ```
 $ ghdl -v
-GHDL 3.0.0-dev (v2.0.0-652-g6961b3f82) [Dunoon edition]
+GHDL 4.0.0-dev (3.0.0.r823.g9e2b6fc95) [Dunoon edition]
  Compiled with GNAT Version: 9.4.0
- mcode code generator
+ static elaboration, mcode code generator
 Written by Tristan Gingold.
 
-Copyright (C) 2003 - 2022 Tristan Gingold.
+Copyright (C) 2003 - 2023 Tristan Gingold.
 GHDL is free software, covered by the GNU General Public License.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
