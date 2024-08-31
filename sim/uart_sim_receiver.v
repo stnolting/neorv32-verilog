@@ -59,9 +59,9 @@ module uart_sim_receiver
         if (uart_rx_bitcnt == 0) begin
           uart_rx_busy <= 1'b0; // done
           if ((char >= 32) && (char <= 127)) begin // is a printable char?
-            $write ("%c", char);
+            $write("%c", char);
           end else if (char == 10) begin // Linux line break?
-            $display (""); // force terminal line break
+            $display(""); // force terminal line break
           end
         end else begin
           uart_rx_sreg   <= {uart_rx_sync[4], uart_rx_sreg[8:1]};
