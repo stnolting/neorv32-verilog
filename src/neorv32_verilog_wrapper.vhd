@@ -28,12 +28,17 @@ begin
     INT_BOOTLOADER_EN          => true,        -- boot configuration: boot explicit bootloader
     -- RISC-V CPU Extensions --
     CPU_EXTENSION_RISCV_A      => true,        -- implement atomic memory operations extension?
+    CPU_EXTENSION_RISCV_B      => true,        -- implement bit-manipulation extension?
     CPU_EXTENSION_RISCV_C      => true,        -- implement compressed extension?
     CPU_EXTENSION_RISCV_M      => true,        -- implement mul/div extension?
     CPU_EXTENSION_RISCV_U      => true,        -- implement user mode extension?
+    CPU_EXTENSION_RISCV_Zbkx   => true,        -- implement cryptography crossbar permutation extension?
     CPU_EXTENSION_RISCV_Zfinx  => true,        -- implement 32-bit floating-point extension (using INT regs!)
     CPU_EXTENSION_RISCV_Zicntr => true,        -- implement base counters?
     CPU_EXTENSION_RISCV_Zicond => true,        -- implement integer conditional operations?
+    CPU_EXTENSION_RISCV_Zknd   => true,        -- implement cryptography NIST AES decryption extension?
+    CPU_EXTENSION_RISCV_Zkne   => true,        -- implement cryptography NIST AES encryption extension?
+    CPU_EXTENSION_RISCV_Zknh   => true,        -- implement cryptography NIST hash extension?
     CPU_EXTENSION_RISCV_Zihpm  => true,        -- implement hardware performance monitors?
     -- Tuning Options --
     FAST_MUL_EN                => true,        -- use DSPs for M extension's multiplier
