@@ -24,42 +24,42 @@ begin
   neorv32_top_inst: neorv32_top
   generic map ( -- ADD CONFIGURATION OPTIONS AS REQUIRED
     -- General --
-    CLOCK_FREQUENCY            => 100_000_000, -- clock frequency of clk_i in Hz
-    INT_BOOTLOADER_EN          => true,        -- boot configuration: boot explicit bootloader
+    CLOCK_FREQUENCY     => 100_000_000, -- clock frequency of clk_i in Hz
+    INT_BOOTLOADER_EN   => true,        -- boot configuration: boot explicit bootloader
     -- RISC-V CPU Extensions --
-    CPU_EXTENSION_RISCV_A      => true,        -- implement atomic memory operations extension?
-    CPU_EXTENSION_RISCV_B      => true,        -- implement bit-manipulation extension?
-    CPU_EXTENSION_RISCV_C      => true,        -- implement compressed extension?
-    CPU_EXTENSION_RISCV_M      => true,        -- implement mul/div extension?
-    CPU_EXTENSION_RISCV_U      => true,        -- implement user mode extension?
-    CPU_EXTENSION_RISCV_Zbkx   => true,        -- implement cryptography crossbar permutation extension?
-    CPU_EXTENSION_RISCV_Zfinx  => true,        -- implement 32-bit floating-point extension (using INT regs!)
-    CPU_EXTENSION_RISCV_Zicntr => true,        -- implement base counters?
-    CPU_EXTENSION_RISCV_Zicond => true,        -- implement integer conditional operations?
-    CPU_EXTENSION_RISCV_Zknd   => true,        -- implement cryptography NIST AES decryption extension?
-    CPU_EXTENSION_RISCV_Zkne   => true,        -- implement cryptography NIST AES encryption extension?
-    CPU_EXTENSION_RISCV_Zknh   => true,        -- implement cryptography NIST hash extension?
-    CPU_EXTENSION_RISCV_Zihpm  => true,        -- implement hardware performance monitors?
+    RISCV_ISA_A         => true,        -- implement atomic memory operations extension?
+    RISCV_ISA_B         => true,        -- implement bit-manipulation extension?
+    RISCV_ISA_C         => true,        -- implement compressed extension?
+    RISCV_ISA_M         => true,        -- implement mul/div extension?
+    RISCV_ISA_U         => true,        -- implement user mode extension?
+    RISCV_ISA_Zbkx      => true,        -- implement cryptography crossbar permutation extension?
+    RISCV_ISA_Zfinx     => true,        -- implement 32-bit floating-point extension (using INT regs!)
+    RISCV_ISA_Zicntr    => true,        -- implement base counters?
+    RISCV_ISA_Zicond    => true,        -- implement integer conditional operations?
+    RISCV_ISA_Zknd      => true,        -- implement cryptography NIST AES decryption extension?
+    RISCV_ISA_Zkne      => true,        -- implement cryptography NIST AES encryption extension?
+    RISCV_ISA_Zknh      => true,        -- implement cryptography NIST hash extension?
+    RISCV_ISA_Zihpm     => true,        -- implement hardware performance monitors?
     -- Tuning Options --
-    FAST_MUL_EN                => true,        -- use DSPs for M extension's multiplier
-    FAST_SHIFT_EN              => true,        -- use barrel shifter for shift operations
+    FAST_MUL_EN         => true,        -- use DSPs for M extension's multiplier
+    FAST_SHIFT_EN       => true,        -- use barrel shifter for shift operations
     -- Physical Memory Protection (PMP) --
-    PMP_NUM_REGIONS            => 4,           -- number of regions (0..16)
-    PMP_MIN_GRANULARITY        => 4,           -- minimal region granularity in bytes, has to be a power of 2, min 4 bytes
+    PMP_NUM_REGIONS     => 4,           -- number of regions (0..16)
+    PMP_MIN_GRANULARITY => 4,           -- minimal region granularity in bytes, has to be a power of 2, min 4 bytes
     -- Hardware Performance Monitors (HPM) --
-    HPM_NUM_CNTS               => 10,          -- number of implemented HPM counters (0..13)
-    HPM_CNT_WIDTH              => 40,          -- total size of HPM counters (0..64)
+    HPM_NUM_CNTS        => 10,          -- number of implemented HPM counters (0..13)
+    HPM_CNT_WIDTH       => 40,          -- total size of HPM counters (0..64)
     -- Internal Instruction memory (IMEM) --
-    MEM_INT_IMEM_EN            => true,        -- implement processor-internal instruction memory
-    MEM_INT_IMEM_SIZE          => 16*1024,     -- size of processor-internal instruction memory in bytes
+    MEM_INT_IMEM_EN     => true,        -- implement processor-internal instruction memory
+    MEM_INT_IMEM_SIZE   => 16*1024,     -- size of processor-internal instruction memory in bytes
     -- Internal Data memory (DMEM) --
-    MEM_INT_DMEM_EN            => true,        -- implement processor-internal data memory
-    MEM_INT_DMEM_SIZE          => 8*1024,      -- size of processor-internal data memory in bytes
+    MEM_INT_DMEM_EN     => true,        -- implement processor-internal data memory
+    MEM_INT_DMEM_SIZE   => 8*1024,      -- size of processor-internal data memory in bytes
     -- Processor peripherals --
-    IO_MTIME_EN                => true,        -- implement machine system timer (MTIME)?
-    IO_UART0_EN                => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
-    IO_UART0_RX_FIFO           => 64,          -- RX fifo depth, has to be a power of two, min 1
-    IO_UART0_TX_FIFO           => 64           -- TX fifo depth, has to be a power of two, min 1
+    IO_MTIME_EN         => true,        -- implement machine system timer (MTIME)?
+    IO_UART0_EN         => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
+    IO_UART0_RX_FIFO    => 64,          -- RX fifo depth, has to be a power of two, min 1
+    IO_UART0_TX_FIFO    => 64           -- TX fifo depth, has to be a power of two, min 1
   )
   port map ( -- ADD PORTS AS REQUIRED
     -- Global control --
