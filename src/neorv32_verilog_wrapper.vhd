@@ -28,10 +28,11 @@ begin
     INT_BOOTLOADER_EN   => true,        -- boot configuration: boot explicit bootloader
     -- RISC-V CPU Extensions --
     RISCV_ISA_A         => true,        -- implement atomic memory operations extension?
-    RISCV_ISA_B         => true,        -- implement bit-manipulation extension?
     RISCV_ISA_C         => true,        -- implement compressed extension?
     RISCV_ISA_M         => true,        -- implement mul/div extension?
     RISCV_ISA_U         => true,        -- implement user mode extension?
+    RISCV_ISA_Zba       => true,        -- implement shifted-add bit-manipulation extension
+    RISCV_ISA_Zbb       => true,        -- implement basic bit-manipulation extension
     RISCV_ISA_Zbkx      => true,        -- implement cryptography crossbar permutation extension?
     RISCV_ISA_Zfinx     => true,        -- implement 32-bit floating-point extension (using INT regs!)
     RISCV_ISA_Zicntr    => true,        -- implement base counters?
