@@ -27,7 +27,6 @@ begin
     CLOCK_FREQUENCY     => 100_000_000, -- clock frequency of clk_i in Hz
     INT_BOOTLOADER_EN   => true,        -- boot configuration: boot explicit bootloader
     -- RISC-V CPU Extensions --
-    RISCV_ISA_A         => true,        -- implement atomic memory operations extension?
     RISCV_ISA_C         => true,        -- implement compressed extension?
     RISCV_ISA_M         => true,        -- implement mul/div extension?
     RISCV_ISA_U         => true,        -- implement user mode extension?
