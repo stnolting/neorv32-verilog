@@ -40,3 +40,10 @@ jobs:
       with:
         name: neorv32_verilog_code
         path: src/neorv32_verilog_wrapper.v
+
+    - name: Debug
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug
+        path: src/neorv32_verilog_wrapper.v
