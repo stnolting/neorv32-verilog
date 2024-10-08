@@ -36,14 +36,8 @@ jobs:
       run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
 
     - name: '📤 Archive generated Verilog code'
-      uses: actions/upload-artifact@v4
-      with:
-        name: neorv32_verilog_code
-        path: src/neorv32_verilog_wrapper.v
-
-    - name: Debug
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: debug
+        name: neorv32_verilog_code
         path: src/neorv32_verilog_wrapper.v
