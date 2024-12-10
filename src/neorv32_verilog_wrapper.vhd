@@ -1,3 +1,13 @@
+-- ================================================================================ --
+-- NEORV32 Wrapper for Verilog Conversion                                           --
+-- -------------------------------------------------------------------------------- --
+-- The NEORV32 RISC-V Processor - https://github.com/stnolting/neorv32              --
+-- Copyright (c) NEORV32 contributors.                                              --
+-- Copyright (c) 2020 - 2024 Stephan Nolting. All rights reserved.                  --
+-- Licensed under the BSD-3-Clause license, see LICENSE for details.                --
+-- SPDX-License-Identifier: BSD-3-Clause                                            --
+-- ================================================================================ --
+
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -5,7 +15,7 @@ library neorv32;
 use neorv32.neorv32_package.all;
 
 entity neorv32_verilog_wrapper is
-  port ( -- ADD PORTS AS REQUIRED
+  port ( -- [note] add ports as required; generics cannot be used
     -- Global control --
     clk_i       : in  std_ulogic; -- global clock, rising edge
     rstn_i      : in  std_ulogic; -- global reset, low-active, async
@@ -22,33 +32,46 @@ begin
   -- The core of the problem ----------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
   neorv32_top_inst: neorv32_top
-  generic map ( -- ADD CONFIGURATION OPTIONS AS REQUIRED
+  generic map ( -- [note] add configuration options as required
     -- Processor Clocking --
     CLOCK_FREQUENCY     => 100_000_000, -- clock frequency of clk_i in Hz
+    CLOCK_GATING_EN     => true,        -- enable clock gating when in sleep mode
     -- Boot Configuration --
     BOOT_MODE_SELECT    => 0,           -- boot via internal bootloader
+    -- On-Chip Debugger (OCD) --
+    OCD_EN              => true,        -- implement on-chip debugger
+    OCD_AUTHENTICATION  => true,        -- implement on-chip debugger authentication
     -- RISC-V CPU Extensions --
-    RISCV_ISA_C         => true,        -- implement compressed extension?
-    RISCV_ISA_M         => true,        -- implement mul/div extension?
-    RISCV_ISA_U         => true,        -- implement user mode extension?
+    RISCV_ISA_C         => true,        -- implement compressed extension
+    RISCV_ISA_M         => true,        -- implement mul/div extension
+    RISCV_ISA_U         => true,        -- implement user mode extension
+    RISCV_ISA_Zalrsc    => true,        -- implement atomic reservation-set extension
     RISCV_ISA_Zba       => true,        -- implement shifted-add bit-manipulation extension
     RISCV_ISA_Zbb       => true,        -- implement basic bit-manipulation extension
-    RISCV_ISA_Zbkx      => true,        -- implement cryptography crossbar permutation extension?
-    RISCV_ISA_Zfinx     => true,        -- implement 32-bit floating-point extension (using INT regs!)
-    RISCV_ISA_Zicntr    => true,        -- implement base counters?
-    RISCV_ISA_Zicond    => true,        -- implement integer conditional operations?
-    RISCV_ISA_Zknd      => true,        -- implement cryptography NIST AES decryption extension?
-    RISCV_ISA_Zkne      => true,        -- implement cryptography NIST AES encryption extension?
-    RISCV_ISA_Zknh      => true,        -- implement cryptography NIST hash extension?
-    RISCV_ISA_Zihpm     => true,        -- implement hardware performance monitors?
+    RISCV_ISA_Zbkb      => true,        -- implement bit-manipulation instructions for cryptography
+    RISCV_ISA_Zbkc      => true,        -- implement carry-less multiplication instructions
+    RISCV_ISA_Zbkx      => true,        -- implement cryptography crossbar permutation extension
+    RISCV_ISA_Zbs       => true,        -- implement single-bit bit-manipulation extension
+    RISCV_ISA_Zfinx     => true,        -- implement 32-bit floating-point extension
+    RISCV_ISA_Zicntr    => true,        -- implement base counters
+    RISCV_ISA_Zicond    => true,        -- implement integer conditional operations
+    RISCV_ISA_Zihpm     => true,        -- implement hardware performance monitors
+    RISCV_ISA_Zknd      => true,        -- implement cryptography NIST AES decryption extension
+    RISCV_ISA_Zkne      => true,        -- implement cryptography NIST AES encryption extension
+    RISCV_ISA_Zknh      => true,        -- implement cryptography NIST hash extension
+    RISCV_ISA_Zksed     => true,        -- implement ShangMi block cypher extension
+    RISCV_ISA_Zksh      => true,        -- implement ShangMi hash extension
+    RISCV_ISA_Zxcfu     => true,        -- implement custom (instr.) functions unit
     -- Tuning Options --
     FAST_MUL_EN         => true,        -- use DSPs for M extension's multiplier
     FAST_SHIFT_EN       => true,        -- use barrel shifter for shift operations
     -- Physical Memory Protection (PMP) --
     PMP_NUM_REGIONS     => 4,           -- number of regions (0..16)
     PMP_MIN_GRANULARITY => 4,           -- minimal region granularity in bytes, has to be a power of 2, min 4 bytes
+    PMP_TOR_MODE_EN     => true,        -- implement TOR mode
+    PMP_NAP_MODE_EN     => true,        -- implement NAPOT/NA4 modes
     -- Hardware Performance Monitors (HPM) --
-    HPM_NUM_CNTS        => 10,          -- number of implemented HPM counters (0..13)
+    HPM_NUM_CNTS        => 6,           -- number of implemented HPM counters (0..13)
     HPM_CNT_WIDTH       => 40,          -- total size of HPM counters (0..64)
     -- Internal Instruction memory (IMEM) --
     MEM_INT_IMEM_EN     => true,        -- implement processor-internal instruction memory
@@ -56,13 +79,31 @@ begin
     -- Internal Data memory (DMEM) --
     MEM_INT_DMEM_EN     => true,        -- implement processor-internal data memory
     MEM_INT_DMEM_SIZE   => 8*1024,      -- size of processor-internal data memory in bytes
+    -- Internal Instruction Cache (iCACHE) --
+    ICACHE_EN           => true,        -- implement instruction cache
+    ICACHE_NUM_BLOCKS   => 4,           -- i-cache: number of blocks (min 1), has to be a power of 2
+    ICACHE_BLOCK_SIZE   => 64,          -- i-cache: block size in bytes (min 4), has to be a power of 2
+    -- Internal Data Cache (dCACHE) --
+    DCACHE_EN           => true,        -- implement data cache
+    DCACHE_NUM_BLOCKS   => 4,           -- d-cache: number of blocks (min 1), has to be a power of 2
+    DCACHE_BLOCK_SIZE   => 64,          -- d-cache: block size in bytes (min 4), has to be a power of 2
     -- Processor peripherals --
     IO_MTIME_EN         => true,        -- implement machine system timer (MTIME)?
     IO_UART0_EN         => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
     IO_UART0_RX_FIFO    => 64,          -- RX fifo depth, has to be a power of two, min 1
-    IO_UART0_TX_FIFO    => 64           -- TX fifo depth, has to be a power of two, min 1
+    IO_UART0_TX_FIFO    => 64,          -- TX fifo depth, has to be a power of two, min 1
+    IO_SPI_EN           => true,        -- implement serial peripheral interface (SPI)?
+    IO_TWI_EN           => true,        -- implement two-wire interface (TWI)?
+    IO_PWM_NUM_CH       => 2,           -- number of PWM channels to implement (0..16)
+    IO_WDT_EN           => true,        -- implement watch dog timer (WDT)?
+    IO_NEOLED_EN        => true,        -- implement NeoPixel-compatible smart LED interface (NEOLED)?
+    IO_GPTMR_EN         => true,        -- implement general purpose timer (GPTMR)?
+    IO_ONEWIRE_EN       => true,        -- implement 1-wire interface (ONEWIRE)?
+    IO_DMA_EN           => true,        -- implement direct memory access controller (DMA)?
+    IO_SLINK_EN         => true,        -- implement stream link interface (SLINK)?
+    IO_CRC_EN           => true         -- implement cyclic redundancy check unit (CRC)?
   )
-  port map ( -- ADD PORTS AS REQUIRED
+  port map ( -- [note] add ports as required
     -- Global control --
     clk_i       => clk_i,       -- global clock, rising edge
     rstn_i      => rstn_i,      -- global reset, low-active, async
