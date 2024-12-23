@@ -35,7 +35,6 @@ begin
   generic map ( -- [note] add configuration options as required
     -- Processor Clocking --
     CLOCK_FREQUENCY     => 100_000_000, -- clock frequency of clk_i in Hz
-    CLOCK_GATING_EN     => true,        -- enable clock gating when in sleep mode
     -- Boot Configuration --
     BOOT_MODE_SELECT    => 0,           -- boot via internal bootloader
     -- On-Chip Debugger (OCD) --
@@ -59,12 +58,12 @@ begin
     RISCV_ISA_Zknd      => true,        -- implement cryptography NIST AES decryption extension
     RISCV_ISA_Zkne      => true,        -- implement cryptography NIST AES encryption extension
     RISCV_ISA_Zknh      => true,        -- implement cryptography NIST hash extension
-    RISCV_ISA_Zksed     => true,        -- implement ShangMi block cypher extension
+    RISCV_ISA_Zksed     => true,        -- implement ShangMi block cipher extension
     RISCV_ISA_Zksh      => true,        -- implement ShangMi hash extension
     RISCV_ISA_Zxcfu     => true,        -- implement custom (instr.) functions unit
     -- Tuning Options --
-    FAST_MUL_EN         => true,        -- use DSPs for M extension's multiplier
-    FAST_SHIFT_EN       => true,        -- use barrel shifter for shift operations
+    CPU_FAST_MUL_EN     => true,        -- use DSPs for M extension's multiplier
+    CPU_FAST_SHIFT_EN   => true,        -- use barrel shifter for shift operations
     -- Physical Memory Protection (PMP) --
     PMP_NUM_REGIONS     => 4,           -- number of regions (0..16)
     PMP_MIN_GRANULARITY => 4,           -- minimal region granularity in bytes, has to be a power of 2, min 4 bytes
@@ -90,10 +89,11 @@ begin
     -- Processor peripherals --
     IO_MTIME_EN         => true,        -- implement machine system timer (MTIME)?
     IO_UART0_EN         => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
-    IO_UART0_RX_FIFO    => 64,          -- RX fifo depth, has to be a power of two, min 1
-    IO_UART0_TX_FIFO    => 64,          -- TX fifo depth, has to be a power of two, min 1
+    IO_UART0_RX_FIFO    => 64,          -- RX FIFO depth, has to be a power of two, min 1
+    IO_UART0_TX_FIFO    => 64,          -- TX FIFO depth, has to be a power of two, min 1
     IO_SPI_EN           => true,        -- implement serial peripheral interface (SPI)?
     IO_TWI_EN           => true,        -- implement two-wire interface (TWI)?
+    IO_TWD_EN           => true,        -- implement two-wire device (TWD)?
     IO_PWM_NUM_CH       => 2,           -- number of PWM channels to implement (0..16)
     IO_WDT_EN           => true,        -- implement watch dog timer (WDT)?
     IO_NEOLED_EN        => true,        -- implement NeoPixel-compatible smart LED interface (NEOLED)?
