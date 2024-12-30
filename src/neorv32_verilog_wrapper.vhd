@@ -87,7 +87,7 @@ begin
     DCACHE_NUM_BLOCKS   => 4,           -- d-cache: number of blocks (min 1), has to be a power of 2
     DCACHE_BLOCK_SIZE   => 64,          -- d-cache: block size in bytes (min 4), has to be a power of 2
     -- Processor peripherals --
-    IO_MTIME_EN         => true,        -- implement machine system timer (MTIME)?
+    IO_CLINT_EN         => true,        -- implement core local interruptor (CLINT)?
     IO_UART0_EN         => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
     IO_UART0_RX_FIFO    => 64,          -- RX FIFO depth, has to be a power of two, min 1
     IO_UART0_TX_FIFO    => 64,          -- TX FIFO depth, has to be a power of two, min 1
