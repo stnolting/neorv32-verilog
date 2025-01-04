@@ -3,7 +3,7 @@
 -- -------------------------------------------------------------------------------- --
 -- The NEORV32 RISC-V Processor - https://github.com/stnolting/neorv32              --
 -- Copyright (c) NEORV32 contributors.                                              --
--- Copyright (c) 2020 - 2024 Stephan Nolting. All rights reserved.                  --
+-- Copyright (c) 2020 - 2025 Stephan Nolting. All rights reserved.                  --
 -- Licensed under the BSD-3-Clause license, see LICENSE for details.                --
 -- SPDX-License-Identifier: BSD-3-Clause                                            --
 -- ================================================================================ --
@@ -44,7 +44,7 @@ begin
     RISCV_ISA_C         => true,        -- implement compressed extension
     RISCV_ISA_M         => true,        -- implement mul/div extension
     RISCV_ISA_U         => true,        -- implement user mode extension
-    RISCV_ISA_Zalrsc    => true,        -- implement atomic reservation-set extension
+    RISCV_ISA_Zaamo     => true,        -- implement atomic memory operations extension
     RISCV_ISA_Zba       => true,        -- implement shifted-add bit-manipulation extension
     RISCV_ISA_Zbb       => true,        -- implement basic bit-manipulation extension
     RISCV_ISA_Zbkb      => true,        -- implement bit-manipulation instructions for cryptography
