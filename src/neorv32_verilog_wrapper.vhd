@@ -86,6 +86,11 @@ begin
     DCACHE_EN           => true,        -- implement data cache
     DCACHE_NUM_BLOCKS   => 4,           -- d-cache: number of blocks (min 1), has to be a power of 2
     DCACHE_BLOCK_SIZE   => 64,          -- d-cache: block size in bytes (min 4), has to be a power of 2
+    -- External bus interface (XBUS) --
+    XBUS_EN             => true,        -- implement external memory bus interface?
+    XBUS_TIMEOUT        => 256,         -- cycles after a pending bus access auto-terminates (0 = disabled)
+    XBUS_REGSTAGE_EN    => true,        -- add XBUS register stage
+    XBUS_CACHE_EN       => false,       -- enable external bus cache (x-cache)
     -- Processor peripherals --
     IO_CLINT_EN         => true,        -- implement core local interruptor (CLINT)?
     IO_UART0_EN         => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
