@@ -28,11 +28,10 @@ jobs:
         echo "$GITHUB_WORKSPACE/iverilog-27082022.tmp/bin" >> $GITHUB_PATH
 
     - name: '📦 Install GHDL'
-      run: |
-        wget -q https://github.com/ghdl/ghdl/releases/download/v4.1.0/ghdl-gha-ubuntu-22.04-mcode.tgz
-        mkdir $GITHUB_WORKSPACE/ghdl
-        tar -xzf ghdl-gha-ubuntu-22.04-mcode.tgz -C $GITHUB_WORKSPACE/ghdl
-        echo $GITHUB_WORKSPACE/ghdl/bin >> $GITHUB_PATH
+      uses: ghdl/setup-ghdl@v1
+      with:
+        version: nightly
+        backend: mcode
 
     - name: '🚀 Run verification script'
       run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
