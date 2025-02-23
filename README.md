@@ -119,11 +119,17 @@ This repository provides a simple [Verilog testbench](https://github.com/stnolti
 that can be used to simulate the default NEORV32 configuration. The testbench includes a UART receiver, which is driven by the
 processor UART0. It outputs received characters to the simulator console.
 
-A pre-configured simulation script based on [Icarus Verilog](https://github.com/steveicarus/iverilog) can be used to simulate
-the Verilog setup (takes several minutes to complete):
+A pre-configured simulation script based on either [Icarus Verilog](https://github.com/steveicarus/iverilog) or [Verilator](https://www.veripool.org/verilator/) can be used to simulate
+the Verilog setup (takes several minutes to complete with Icarus; few seconds after the compilation stage with Verilator):
 
 ```bash
-neorv32-verilog/sim$ sh iverilog_sim.sh
+cd neorv32-verilog/sim
+# run the makefile: Icarus is the default simulator
+make
+# or with Verilator
+SIM=verilator make
+```
+```
 neorv32-verilog verification testbench
 
 
