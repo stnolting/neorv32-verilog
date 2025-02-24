@@ -27,8 +27,8 @@ jobs:
         version: nightly
         backend: mcode
 
-    - name: '⚙️ Run verification script'
-      run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
+    - name: '⚙️ Run conversion'
+      run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/src/convert.sh && $GITHUB_WORKSPACE/src/convert.sh"
 
     - name: '📤 Archive generated Verilog code'
       if: always()
