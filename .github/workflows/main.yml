@@ -41,6 +41,7 @@ jobs:
 
   sim_iverilog:
     name: '🖥️ Simulation - Icarus Verilog'
+    needs: convert
     runs-on: ubuntu-latest
 
     steps:
@@ -69,6 +70,7 @@ jobs:
 
   sim_verilator:
     name: '🖥️ Simulation - Verilator'
+    needs: convert
     runs-on: ubuntu-latest
 
     steps:
