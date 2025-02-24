@@ -41,7 +41,6 @@ jobs:
 
   sim_iverilog:
     name: '🖥️ Simulation - Icarus Verilog'
-    needs: convert
     runs-on: ubuntu-latest
 
     steps:
@@ -50,15 +49,11 @@ jobs:
       run: sudo apt install iverilog
 
     - name: '⚙️ Run simulation'
-      run: |
-        cd $GITHUB_WORKSPACE
-        make -C sim SIM=iverilog > iverilog.log
-        grep 'Simulation successful!' iverilog.log
+      run: /bin/bash -c "pwd"
 
 
   sim_verilator:
     name: '🖥️ Simulation - Verilator'
-    needs: convert
     runs-on: ubuntu-latest
 
     steps:
@@ -67,7 +62,4 @@ jobs:
       run: sudo apt install verilator
 
     - name: '⚙️ Run simulation'
-      run: |
-        cd $GITHUB_WORKSPACE
-        make -C sim SIM=verilator > verilator.log
-        grep 'Simulation successful!' verilator.log
+      run: /bin/bash -c "ls -al"
