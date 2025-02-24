@@ -49,10 +49,9 @@ jobs:
     - name: '📦 Install Icarus Verilog'
       run: sudo apt install iverilog
 
-    - name: '⚙️ Run verification script'
+    - name: '⚙️ Run simulation'
       run: |
-        ls
-        pwd
+        cd $GITHUB_WORKSPACE
         make -C sim SIM=iverilog > iverilog.log
         grep 'Simulation successful!' iverilog.log
 
@@ -67,7 +66,8 @@ jobs:
     - name: '📦 Install Verilator'
       run: sudo apt install verilator
 
-    - name: '⚙️ Run verification script'
+    - name: '⚙️ Run simulation'
       run: |
+        cd $GITHUB_WORKSPACE
         make -C sim SIM=verilator > verilator.log
         grep 'Simulation successful!' verilator.log
