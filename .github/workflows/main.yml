@@ -51,7 +51,10 @@ jobs:
 
     - name: '⚙️ Run verification script'
       run: |
-        make -C sim SIM=iverilog
+        ls
+        pwd
+        make -C sim SIM=iverilog > iverilog.log
+        grep 'Simulation successful!' iverilog.log
 
 
   sim_verilator:
@@ -66,4 +69,5 @@ jobs:
 
     - name: '⚙️ Run verification script'
       run: |
-        make -C sim SIM=verilator
+        make -C sim SIM=verilator > verilator.log
+        grep 'Simulation successful!' verilator.log
