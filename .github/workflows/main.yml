@@ -35,7 +35,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: neorv32_verilog_code
+        name: neorv32_verilog_wrapper.v
         path: src/neorv32_verilog_wrapper.v
 
 
@@ -45,11 +45,26 @@ jobs:
 
     steps:
 
+    - name: '📂 Repository Checkout'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: '📂 Checkout Conversion Artifact'
+      uses: actions/checkout@v4
+        with:
+          name: neorv32_verilog_wrapper.v
+          path: src/neorv32_verilog_wrapper.v
+
     - name: '📦 Install Icarus Verilog'
       run: sudo apt install iverilog
 
-    - name: '⚙️ Run simulation'
-      run: /bin/bash -c "pwd"
+    - name: '⚙️ Run Simulation'
+      run: |
+        cd $GITHUB_WORKSPACE
+        make -C sim SIM=iverilog > iverilog.log
+        grep 'Simulation successful!' iverilog.log
 
 
   sim_verilator:
@@ -58,8 +73,23 @@ jobs:
 
     steps:
 
+    - name: '📂 Repository Checkout'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: '📂 Checkout Conversion Artifact'
+      uses: actions/checkout@v4
+        with:
+          name: neorv32_verilog_wrapper.v
+          path: src/neorv32_verilog_wrapper.v
+
     - name: '📦 Install Verilator'
       run: sudo apt install verilator
 
-    - name: '⚙️ Run simulation'
-      run: /bin/bash -c "ls -al"
+    - name: '⚙️ Run Simulation'
+      run: |
+        cd $GITHUB_WORKSPACE
+        make -C sim SIM=verilator > verilator.log
+        grep 'Simulation successful!' verilator.log
