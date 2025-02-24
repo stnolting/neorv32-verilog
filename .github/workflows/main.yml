@@ -7,6 +7,7 @@ on:
     - cron: '0 0 * * 5'
   workflow_dispatch:
 
+
 jobs:
 
   convert:
@@ -49,7 +50,8 @@ jobs:
       run: sudo apt install iverilog
 
     - name: '⚙️ Run verification script'
-      run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
+      run: |
+        make -C sim SIM=iverilog
 
 
   sim_verilator:
@@ -62,3 +64,6 @@ jobs:
     - name: '📦 Install Verilator'
       run: sudo apt install verilator
 
+    - name: '⚙️ Run verification script'
+      run: |
+        make -C sim SIM=verilator
