@@ -38,7 +38,7 @@ jobs:
         path: src/neorv32_verilog_wrapper.v
 
 
-  sim_iverliog:
+  sim_iverilog:
     name: '🖥️ Simulation - Icarus Verilog'
     needs: convert
     runs-on: ubuntu-latest
@@ -46,12 +46,19 @@ jobs:
     steps:
 
     - name: '📦 Install Icarus Verilog'
-      run: |
-        wget https://github.com/stnolting/icarus-verilog-prebuilt/releases/download/v1.0.0/iverilog-27082022.tar.gz
-        mkdir $GITHUB_WORKSPACE/iverilog-27082022.tmp
-        tar -xzf iverilog-27082022.tar.gz -C $GITHUB_WORKSPACE/iverilog-27082022.tmp/
-        echo "$GITHUB_WORKSPACE/iverilog-27082022.tmp/bin" >> $GITHUB_PATH
+      run: sudo apt install iverilog
 
     - name: '⚙️ Run verification script'
       run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
+
+
+  sim_verilator:
+    name: '🖥️ Simulation - Verilator'
+    needs: convert
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: '📦 Install Verilator'
+      run: sudo apt install verilator
 
