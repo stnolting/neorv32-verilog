@@ -53,7 +53,7 @@ jobs:
         submodules: recursive
 
     - name: '📂 Checkout Conversion Artifact'
-      uses: actions/checkout@v4
+      uses: actions/download-artifact@v4
       with:
         name: neorv32_verilog_wrapper.v
         path: src/neorv32_verilog_wrapper.v
@@ -83,7 +83,7 @@ jobs:
         submodules: recursive
 
     - name: '📂 Checkout Conversion Artifact'
-      uses: actions/checkout@v4
+      uses: actions/download-artifact@v4
       with:
         name: neorv32_verilog_wrapper.v
         path: src/neorv32_verilog_wrapper.v
