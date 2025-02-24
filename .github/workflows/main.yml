@@ -58,19 +58,13 @@ jobs:
         name: neorv32_verilog_wrapper.v
         path: src/neorv32_verilog_wrapper.v
 
-    - name: '⚙️ Run Simulation'
-      run: |
-        ls -al
-        cd $GITHUB_WORKSPACE
-        ls -al
-        ls src
-
     - name: '📦 Install Icarus Verilog'
       run: sudo apt install iverilog
 
     - name: '⚙️ Run Simulation'
       run: |
         cd $GITHUB_WORKSPACE
+        ls -al src
         make -C sim SIM=icarus > iverilog.log
         grep 'Simulation successful!' iverilog.log
 
@@ -100,5 +94,6 @@ jobs:
     - name: '⚙️ Run Simulation'
       run: |
         cd $GITHUB_WORKSPACE
+        ls -al src
         make -C sim SIM=verilator > verilator.log
         grep 'Simulation successful!' verilator.log
