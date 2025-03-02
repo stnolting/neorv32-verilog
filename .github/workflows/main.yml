@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: neorv32_verilog_wrapper.v
-        path: src/neorv32_verilog_wrapper.v
+        path: $GITHUB_WORKSPACE/src/neorv32_verilog_wrapper.v
 
 
   sim_iverilog:
@@ -52,6 +52,11 @@ jobs:
         fetch-depth: 0
         submodules: recursive
 
+    - name: '📂 Checkout Conversion Artifact'
+      uses: actions/download-artifact@v4
+      with:
+        name: neorv32_verilog_wrapper.v
+        path: $GITHUB_WORKSPACE/src/neorv32_verilog_wrapper.v
 
     - name: '📦 Install Icarus Verilog'
       run: sudo apt install iverilog
@@ -81,7 +86,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: neorv32_verilog_wrapper.v
-        path: src/neorv32_verilog_wrapper.v
+        path: $GITHUB_WORKSPACE/src/neorv32_verilog_wrapper.v
 
     - name: '📦 Install Verilator'
       run: sudo apt install verilator
