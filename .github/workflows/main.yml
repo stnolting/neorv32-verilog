@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: neorv32_verilog_wrapper.v
-        path: $GITHUB_WORKSPACE/src/neorv32_verilog_wrapper.v
+        path: src/neorv32_verilog_wrapper.v
 
 
   sim_iverilog:
@@ -56,7 +56,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: neorv32_verilog_wrapper.v
-        path: $GITHUB_WORKSPACE/src/neorv32_verilog_wrapper.v
+        path: src/neorv32_verilog_wrapper.v
 
     - name: '📦 Install Icarus Verilog'
       run: sudo apt install iverilog
@@ -65,6 +65,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         ls -al src
+        cat src/neorv32_verilog_wrapper.v
         make -C sim SIM=icarus > iverilog.log
         grep 'Simulation successful!' iverilog.log
 
