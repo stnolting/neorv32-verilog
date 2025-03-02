@@ -8,7 +8,7 @@ cd $(dirname "$0")
 NEORV32_HOME=${NEORV32_RTL:-../neorv32}
 # Additional sources (i.e. the top unit)
 SRC_FOLDER=${SRC_FOLDER:-.}
-#Name of the top unit
+# Name of the top unit
 TOP=neorv32_verilog_wrapper
 
 mkdir -p build
