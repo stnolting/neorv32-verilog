@@ -7,9 +7,11 @@ on:
     - cron: '0 0 * * 5'
   workflow_dispatch:
 
+
 jobs:
 
-  Check:
+  convert:
+    name: '♻️ Convert to Verilog'
     runs-on: ubuntu-latest
 
     steps:
@@ -20,25 +22,78 @@ jobs:
         fetch-depth: 0
         submodules: recursive
 
-    - name: '📦 Install Icarus Verilog'
-      run: |
-        wget https://github.com/stnolting/icarus-verilog-prebuilt/releases/download/v1.0.0/iverilog-27082022.tar.gz
-        mkdir $GITHUB_WORKSPACE/iverilog-27082022.tmp
-        tar -xzf iverilog-27082022.tar.gz -C $GITHUB_WORKSPACE/iverilog-27082022.tmp/
-        echo "$GITHUB_WORKSPACE/iverilog-27082022.tmp/bin" >> $GITHUB_PATH
-
     - name: '📦 Install GHDL'
       uses: ghdl/setup-ghdl@v1
       with:
         version: nightly
         backend: mcode
 
-    - name: '🚀 Run verification script'
-      run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/.github/check.sh && $GITHUB_WORKSPACE/.github/check.sh"
+    - name: '⚙️ Run conversion'
+      run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/src/convert.sh && $GITHUB_WORKSPACE/src/convert.sh"
 
     - name: '📤 Archive generated Verilog code'
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: neorv32_verilog_code
+        name: neorv32_verilog_wrapper
         path: src/neorv32_verilog_wrapper.v
+
+
+  sim_iverilog:
+    name: '🖥️ Simulation - Icarus Verilog'
+    needs: convert
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: '📂 Repository Checkout'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: '📂 Checkout Conversion Artifact'
+      uses: actions/download-artifact@v4
+      with:
+        name: neorv32_verilog_wrapper
+        path: src
+
+    - name: '📦 Install Icarus Verilog'
+      run: sudo apt install iverilog
+
+    - name: '⚙️ Run Simulation'
+      run: |
+        cd $GITHUB_WORKSPACE
+        ls -al src
+        make -C sim SIM=icarus | tee iverilog.log
+        grep 'Simulation successful!' iverilog.log
+
+
+  sim_verilator:
+    name: '🖥️ Simulation - Verilator'
+    needs: convert
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: '📂 Repository Checkout'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: recursive
+
+    - name: '📂 Checkout Conversion Artifact'
+      uses: actions/download-artifact@v4
+      with:
+        name: neorv32_verilog_wrapper
+        path: src
+
+    - name: '📦 Install Verilator'
+      run: sudo apt install verilator
+
+    - name: '⚙️ Run Simulation'
+      run: |
+        cd $GITHUB_WORKSPACE
+        ls -al src
+        make -C sim SIM=verilator  | tee  verilator.log
+        grep 'Simulation successful!' verilator.log
