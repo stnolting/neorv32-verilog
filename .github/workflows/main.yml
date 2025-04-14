@@ -25,7 +25,7 @@ jobs:
     - name: '📦 Install GHDL'
       uses: ghdl/setup-ghdl@v1
       with:
-        version: nightly
+        version: v5.0.1
         backend: mcode
 
     - name: '⚙️ Run conversion'
@@ -95,5 +95,5 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         ls -al src
-        make -C sim SIM=verilator  | tee  verilator.log
+        make -C sim SIM=verilator | tee verilator.log
         grep 'Simulation successful!' verilator.log
