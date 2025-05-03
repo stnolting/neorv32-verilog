@@ -78,19 +78,16 @@ begin
     -- Internal Data memory (DMEM) --
     MEM_INT_DMEM_EN     => true,        -- implement processor-internal data memory
     MEM_INT_DMEM_SIZE   => 8*1024,      -- size of processor-internal data memory in bytes
-    -- Internal Instruction Cache (iCACHE) --
-    ICACHE_EN           => true,        -- implement instruction cache
+    -- CPU Caches --
+    ICACHE_EN           => true,        -- implement instruction cache (i-cache)
     ICACHE_NUM_BLOCKS   => 4,           -- i-cache: number of blocks (min 1), has to be a power of 2
-    ICACHE_BLOCK_SIZE   => 64,          -- i-cache: block size in bytes (min 4), has to be a power of 2
-    -- Internal Data Cache (dCACHE) --
-    DCACHE_EN           => true,        -- implement data cache
+    DCACHE_EN           => true,        -- implement data cache (d-cache)
     DCACHE_NUM_BLOCKS   => 4,           -- d-cache: number of blocks (min 1), has to be a power of 2
-    DCACHE_BLOCK_SIZE   => 64,          -- d-cache: block size in bytes (min 4), has to be a power of 2
+    CACHE_BLOCK_SIZE    => 64,          -- i-cache/d-cache: block size in bytes (min 4), has to be a power of 2
     -- External bus interface (XBUS) --
     XBUS_EN             => true,        -- implement external memory bus interface?
     XBUS_TIMEOUT        => 256,         -- cycles after a pending bus access auto-terminates (0 = disabled)
     XBUS_REGSTAGE_EN    => true,        -- add XBUS register stage
-    XBUS_CACHE_EN       => false,       -- enable external bus cache (x-cache)
     -- Processor peripherals --
     IO_CLINT_EN         => true,        -- implement core local interruptor (CLINT)?
     IO_UART0_EN         => true,        -- implement primary universal asynchronous receiver/transmitter (UART0)?
