@@ -73,11 +73,11 @@ begin
     HPM_NUM_CNTS        => 6,           -- number of implemented HPM counters (0..13)
     HPM_CNT_WIDTH       => 40,          -- total size of HPM counters (0..64)
     -- Internal Instruction memory (IMEM) --
-    MEM_INT_IMEM_EN     => true,        -- implement processor-internal instruction memory
-    MEM_INT_IMEM_SIZE   => 16*1024,     -- size of processor-internal instruction memory in bytes
+    IMEM_EN             => true,        -- implement processor-internal instruction memory
+    IMEM_SIZE           => 16*1024,     -- size of processor-internal instruction memory in bytes
     -- Internal Data memory (DMEM) --
-    MEM_INT_DMEM_EN     => true,        -- implement processor-internal data memory
-    MEM_INT_DMEM_SIZE   => 8*1024,      -- size of processor-internal data memory in bytes
+    DMEM_EN             => true,        -- implement processor-internal data memory
+    DMEM_SIZE           => 8*1024,      -- size of processor-internal data memory in bytes
     -- CPU Caches --
     ICACHE_EN           => true,        -- implement instruction cache (i-cache)
     ICACHE_NUM_BLOCKS   => 4,           -- i-cache: number of blocks (min 1), has to be a power of 2
@@ -102,8 +102,7 @@ begin
     IO_GPTMR_EN         => true,        -- implement general purpose timer (GPTMR)?
     IO_ONEWIRE_EN       => true,        -- implement 1-wire interface (ONEWIRE)?
     IO_DMA_EN           => true,        -- implement direct memory access controller (DMA)?
-    IO_SLINK_EN         => true,        -- implement stream link interface (SLINK)?
-    IO_CRC_EN           => true         -- implement cyclic redundancy check unit (CRC)?
+    IO_SLINK_EN         => true         -- implement stream link interface (SLINK)?
   )
   port map ( -- [note] add ports as required
     -- Global control --
