@@ -53,8 +53,6 @@ GHDL is free software, covered by the GNU General Public License.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-[[back to top](#neorv32-in-verilog)]
-
 
 ## Configuration
 
@@ -75,8 +73,6 @@ and interfaces - just enough to run the processor's built-in bootloader.
 Have a look at the original [processor top entity (`neorv32_top.vhd`)](https://github.com/stnolting/neorv32/blob/main/rtl/core/neorv32_top.vhd)
 and just copy the generics and ports that you would like to use for the Verilog setup.
 Note that all NEORV32 interface inputs and configuration generics do provide _default values_.
-
-[[back to top](#neorv32-in-verilog)]
 
 
 ## Conversion
@@ -110,8 +106,6 @@ However, optimizations will be performed by the synthesis tool (e.g. mapping to 
 of simulation waveforms and synthesis results.
 * Custom VHDL interface types and records are collapsed into linear arrays.
 
-[[back to top](#neorv32-in-verilog)]
-
 
 ## Simulation
 
@@ -119,8 +113,9 @@ This repository provides a simple [Verilog testbench](https://github.com/stnolti
 that can be used to simulate the default NEORV32 configuration. The testbench includes a UART receiver, which is driven by the
 processor UART0. It outputs received characters to the simulator console.
 
-A pre-configured simulation script based on either [Icarus Verilog](https://github.com/steveicarus/iverilog) or [Verilator](https://www.veripool.org/verilator/) can be used to simulate
-the Verilog setup (takes several minutes to complete with Icarus; few seconds after the compilation stage with Verilator):
+A pre-configured simulation script based on either [Icarus Verilog](https://github.com/steveicarus/iverilog) or
+[Verilator](https://www.veripool.org/verilator/) can be used to simulate the Verilog setup (takes several minutes
+to complete with Icarus; few seconds after the compilation stage with Verilator):
 
 ```bash
 cd neorv32-verilog/sim
@@ -143,13 +138,6 @@ Simulation successful!
 The simulation is terminated automatically as soon as the string "`NEORV32`" has been received from the processor's bootloader.
 In this case `Simulation successful!` is printed to the console. If `Simulation terminated!` appears in the simulator console
 the simulation has failed.
-
-[![Check_iverilog](https://img.shields.io/github/actions/workflow/status/stnolting/icarus-verilog-prebuilt/check_iverilog.yml?branch=main&longCache=true&style=flat&label=Check%20iverilog%20packages&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/icarus-verilog-prebuilt/actions/workflows/check_iverilog.yml)
-\
-Prebuilt Icarus Verilog binaries for Linux can be downloaded from
-[stnolting/icarus-verilog-prebuilt](https://github.com/stnolting/icarus-verilog-prebuilt).
-
-[[back to top](#neorv32-in-verilog)]
 
 
 ## Evaluation
@@ -180,5 +168,3 @@ on a Terasic DE0-nano FPGA board.
 | Embedded multiplier  | 0           | 0        |
 | f_max [MHz]          | 115.3       | 122.2    |
 | Operational          | yes         | yes      |
-
-[[back to top](#neorv32-in-verilog)]
