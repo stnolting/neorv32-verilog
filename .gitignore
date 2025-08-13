@@ -1,4 +1,4 @@
-sim/neorv32-verilog-sim
+neorv32-verilog-sim
 obj_dir
 *.log
 src/build
