@@ -29,7 +29,8 @@ jobs:
         backend: mcode
 
     - name: '⚙️ Run conversion'
-      run: /bin/bash -c "chmod u+x $GITHUB_WORKSPACE/src/convert.sh && $GITHUB_WORKSPACE/src/convert.sh"
+      run: |
+        make clean check convert
 
     - name: '📤 Archive generated Verilog code'
       if: always()
@@ -63,9 +64,7 @@ jobs:
 
     - name: '⚙️ Run Simulation'
       run: |
-        cd $GITHUB_WORKSPACE
-        ls -al src
-        make -C sim SIM=icarus | tee iverilog.log
+        make SIMULATOR=iverilog sim | tee iverilog.log
         grep 'Simulation successful!' iverilog.log
 
 
@@ -93,7 +92,5 @@ jobs:
 
     - name: '⚙️ Run Simulation'
       run: |
-        cd $GITHUB_WORKSPACE
-        ls -al src
-        make -C sim SIM=verilator | tee verilator.log
+        make SIMULATOR=verilator sim | tee verilator.log
         grep 'Simulation successful!' verilator.log
