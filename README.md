@@ -28,7 +28,7 @@ The generated Verilog code for the default processor configuration can be downlo
 
 ## Prerequisites
 
-1. Clone this repository recursively to include the NEORV32 submodule.
+1. Clone this repository **recursively** to include the NEORV32 submodule.
 
 2. Install GHDL. On a Linux machine GHDL can be installed easily via the package manager.
 :warning: **Make sure to install a version with `--synth` option enabled (should be enabled by default).
@@ -38,17 +38,16 @@ GHDL version 3.0.0 or higher is required.**
 $ sudo apt-get install ghdl
 ```
 
-
 3. Test the GHDL installation and check the version.
 
 ```
-$ ghdl -v
-GHDL 4.0.0-dev (3.0.0.r823.g9e2b6fc95) [Dunoon edition]
- Compiled with GNAT Version: 9.4.0
- static elaboration, mcode code generator
+neorv32-verilog$ make check
+GHDL 4.1.0 (4.0.0.r39.g7188e92cf) [Dunoon edition]
+ Compiled with GNAT Version: 10.5.0
+ static elaboration, mcode JIT code generator
 Written by Tristan Gingold.
 
-Copyright (C) 2003 - 2023 Tristan Gingold.
+Copyright (C) 2003 - 2024 Tristan Gingold.
 GHDL is free software, covered by the GNU General Public License.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
@@ -78,10 +77,11 @@ Note that all NEORV32 interface inputs and configuration generics do provide _de
 ## Conversion
 
 The actual conversion is conducted by a conversion shell script, which analyzes all the processor's sources and finally
-calls GHDL `synth` to create the final Verilog code `neorv32-verilog/src/neorv32_verilog_wrapper.v`.
+calls GHDL `synth` to create the final Verilog code `neorv32-verilog/src/neorv32_verilog_wrapper.v`. The conversion script
+is invoked by the Makefile:
 
 ```bash
-neorv32-verilog/src$ sh convert.sh
+neorv32-verilog$ make convert
 ```
 
 After conversion, the interface of the resulting `neorv32_verilog_wrapper` Verilog
@@ -110,29 +110,27 @@ of simulation waveforms and synthesis results.
 ## Simulation
 
 This repository provides a simple [Verilog testbench](https://github.com/stnolting/neorv32-verilog/blob/main/sim/testbench.v)
-that can be used to simulate the default NEORV32 configuration. The testbench includes a UART receiver, which is driven by the
-processor UART0. It outputs received characters to the simulator console.
+that can be used to simulate converted NEORV32 processor. The testbench includes a UART receiver, which is driven by the
+processor's UART0. The receiver outputs received characters to the simulator console.
 
-A pre-configured simulation script based on either [Icarus Verilog](https://github.com/steveicarus/iverilog) or
-[Verilator](https://www.veripool.org/verilator/) can be used to simulate the Verilog setup (takes several minutes
-to complete with Icarus; few seconds after the compilation stage with Verilator):
+You can use [Icarus Verilog](https://github.com/steveicarus/iverilog) or
+[Verilator](https://github.com/verilator/verilator) for simulation:
+
+* `neorv32-verilog$ make SIMULATOR=iverilog sim`
+* `neorv32-verilog$ make SIMULATOR=verilator sim`
 
 ```bash
-cd neorv32-verilog/sim
-# run the makefile: Icarus is the default simulator
-make
-# or with Verilator
-SIM=verilator make
-```
-```
+neorv32-verilog$ make SIMULATOR=iverilog sim
+Running simulation with iverilog
+iverilog -o neorv32-verilog-sim sim/testbench.v sim/uart_sim_receiver.v src/neorv32_verilog_wrapper.v
+vvp neorv32-verilog-sim
 neorv32-verilog verification testbench
 
 
 
 
-<< NEORV32
+NEORV32
 Simulation successful!
-./testbench.v:79: $finish called at 95372250 (100ps)
 ```
 
 The simulation is terminated automatically as soon as the string "`NEORV32`" has been received from the processor's bootloader.
