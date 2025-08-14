@@ -1,5 +1,7 @@
 neorv32-verilog-sim
 obj_dir
 *.log
+*.vcd
+*.ghw
 src/build
 src/*.v

@@ -116,12 +116,14 @@ processor's UART0. The receiver outputs received characters to the simulator con
 You can use [Icarus Verilog](https://github.com/steveicarus/iverilog) or
 [Verilator](https://github.com/verilator/verilator) for simulation:
 
-* `neorv32-verilog$ make SIMULATOR=iverilog sim`
-* `neorv32-verilog$ make SIMULATOR=verilator sim`
+* Icarus Verilog: `neorv32-verilog$ make SIMULATOR=iverilog sim`
+* Verilator: `neorv32-verilog$ make SIMULATOR=verilator sim`
+
+Example:
 
 ```bash
 neorv32-verilog$ make SIMULATOR=iverilog sim
-Running simulation with iverilog
+Running simulation with Icarus Verilog
 iverilog -o neorv32-verilog-sim sim/testbench.v sim/uart_sim_receiver.v src/neorv32_verilog_wrapper.v
 vvp neorv32-verilog-sim
 neorv32-verilog verification testbench
@@ -136,6 +138,26 @@ Simulation successful!
 The simulation is terminated automatically as soon as the string "`NEORV32`" has been received from the processor's bootloader.
 In this case `Simulation successful!` is printed to the console. If `Simulation terminated!` appears in the simulator console
 the simulation has failed.
+
+
+### Dumping Waveform Data
+
+The simulator (Icarus Verilog or Verilator) will emit waveform data if the `DUMP_WAVE` variable is set to `1`. Example:
+
+```bash
+neorv32-verilog$ make SIMULATOR=verilator DUMP_WAVE=1 sim
+```
+
+The waveform dump file will be stored as `wave.vcd` in the repository's root directory.
+It can be viewed with GTKwave, for example:
+
+```bash
+neorv32-verilog$ gtkwave wave.vcd
+```
+
+> [!NOTE]
+> Dumping waveform data with Icarus Verilog for the _default_ testbench and processor configuration
+> will take quite some time.
 
 
 ## Evaluation

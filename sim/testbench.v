@@ -1,7 +1,7 @@
 // simple testbench to check the default NEORV32 Verilog wrapper
 // checks for the initial UART output of the bootloader ("NEORV32")
 
-// (c) 2024 by Stephan Nolting, BSD 3-Clause License
+// (c) 2025 by Stephan Nolting, BSD 3-Clause License
 // https://github.com/stnolting/neorv32-verilog
 
 `timescale 1 ns/100 ps // time-unit = 1 ns, precision = 100 ps
@@ -15,6 +15,10 @@ module neorv32_verilog_tb;
 
   // generator setup
   initial begin
+    if (`DUMP_WAVE == 1) begin
+      $dumpfile("wave.vcd"); // write waveform data
+      $dumpvars();
+    end
     $display ("neorv32-verilog verification testbench\n");
     clk = 0;
     nrst = 0;
@@ -73,7 +77,6 @@ module neorv32_verilog_tb;
         (char_buffer[4] == "V") &&
         (char_buffer[5] == "3") &&
         (char_buffer[6] == "2")) begin
-      // simulation was successful
       $display (""); // force line break
       $display("Simulation successful!");
       $finish; // terminate

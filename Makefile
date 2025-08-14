@@ -4,6 +4,7 @@ all: check clean convert run
 SIMULATOR ?= iverilog
 SRC_FOLDER ?= src
 SIM_FOLDER ?= sim
+DUMP_WAVE ?= 0
 NEORV32_VERILOG = $(SRC_FOLDER)/neorv32_verilog_wrapper.v
 
 SRC_FILES = $(SIM_FOLDER)/testbench.v $(SIM_FOLDER)/uart_sim_receiver.v $(NEORV32_VERILOG)
@@ -19,12 +20,16 @@ $(NEORV32_VERILOG):
 	@sh $(SRC_FOLDER)/convert.sh
 
 sim: $(NEORV32_VERILOG)
-	@echo "Running simulation with $(SIMULATOR)"
+ifeq ($(DUMP_WAVE), 1)
+	@echo "Dumping waveform data to 'wave.vcd'"
+endif
 ifeq ($(SIMULATOR), iverilog)
-	iverilog -o neorv32-verilog-sim $(SRC_FILES)
+	@echo "Running simulation with Icarus Verilog"
+	iverilog -DDUMP_WAVE=$(DUMP_WAVE) -o neorv32-verilog-sim $(SRC_FILES)
 	vvp neorv32-verilog-sim
 else ifeq ($(SIMULATOR), verilator)
-	verilator $(VERILATOR_ARGS) $(SRC_FILES)
+	@echo "Running simulation with Verilator"
+	verilator -DDUMP_WAVE=$(DUMP_WAVE) $(VERILATOR_ARGS) $(SRC_FILES)
 	./obj_dir/Vtestbench
 else
 	$(error Unsupported simulator: $(SIMULATOR))
@@ -34,8 +39,10 @@ clean:
 	@echo "Removing artifacts..."
 	rm -rf $(SRC_FOLDER)/build
 	rm -rf $(SRC_FOLDER)/neorv32_verilog_wrapper.v
-	rm -rf $(SIM_FOLDER)/neorv32-verilog-sim
-	rm -rf $(SIM_FOLDER)/obj_dir
+	rm -rf obj_dir
+	rm -rf neorv32-verilog-sim
+	rm -rf *.vcd
+	rm -rf *.log
 
 help:
 	@echo "neorv32-verilog makefile"
@@ -50,6 +57,7 @@ help:
 	@echo ""
 	@echo "Variables:"
 	@echo "  SIMULATOR  Verilog simulator, 'iverilog' or 'verilator'; default = $(SIMULATOR)"
+	@echo "  DUMP_WAVE  Dump waveform data to 'wave.vcd' when set to 1; default = $(DUMP_WAVE)"
 	@echo ""
 	@echo "Example:"
 	@echo "  make SIMULATOR=iverilog clean convert sim"
