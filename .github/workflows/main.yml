@@ -92,5 +92,11 @@ jobs:
 
     - name: '⚙️ Run Simulation'
       run: |
-        make SIMULATOR=verilator sim | tee verilator.log
+        make sim SIMULATOR=verilator DUMP_WAVE=1 | tee verilator.log
         grep 'Simulation successful!' verilator.log
+
+    - name: '📤 Archive generated waveform'
+      uses: actions/upload-artifact@v4
+      with:
+        name: wave.fst
+        path: wave.fst

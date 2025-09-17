@@ -8,7 +8,11 @@ DUMP_WAVE ?= 0
 NEORV32_VERILOG = $(SRC_FOLDER)/neorv32_verilog_wrapper.v
 
 SRC_FILES = $(SIM_FOLDER)/testbench.v $(SIM_FOLDER)/uart_sim_receiver.v $(NEORV32_VERILOG)
-VERILATOR_ARGS = -Wno-fatal --binary --trace
+VERILATOR_ARGS = -Wno-fatal --binary
+
+ifeq ($(DUMP_WAVE), 1)
+VERILATOR_ARGS += --trace --trace-fst
+endif
 
 check:
 	@ghdl -v
@@ -21,7 +25,7 @@ $(NEORV32_VERILOG):
 
 sim: $(NEORV32_VERILOG)
 ifeq ($(DUMP_WAVE), 1)
-	@echo "Dumping waveform data to 'wave.vcd'"
+	@echo "Dumping waveform data to 'wave.fst'"
 endif
 ifeq ($(SIMULATOR), iverilog)
 	@echo "Running simulation with Icarus Verilog"
@@ -42,6 +46,7 @@ clean:
 	rm -rf obj_dir
 	rm -rf neorv32-verilog-sim
 	rm -rf *.vcd
+	rm -rf *.fst
 	rm -rf *.log
 
 help:
@@ -57,7 +62,7 @@ help:
 	@echo ""
 	@echo "Variables:"
 	@echo "  SIMULATOR  Verilog simulator, 'iverilog' or 'verilator'; default = $(SIMULATOR)"
-	@echo "  DUMP_WAVE  Dump waveform data to 'wave.vcd' when set to 1; default = $(DUMP_WAVE)"
+	@echo "  DUMP_WAVE  Dump waveform data to 'wave.fst' when set to 1; default = $(DUMP_WAVE)"
 	@echo ""
 	@echo "Example:"
 	@echo "  make SIMULATOR=iverilog clean convert sim"
