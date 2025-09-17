@@ -8,8 +8,11 @@ DUMP_WAVE ?= 0
 NEORV32_VERILOG = $(SRC_FOLDER)/neorv32_verilog_wrapper.v
 
 SRC_FILES = $(SIM_FOLDER)/testbench.v $(SIM_FOLDER)/uart_sim_receiver.v $(NEORV32_VERILOG)
-VERILATOR_ARGS = -Wno-fatal --binary --trace
-VERILATOR_ARGS += --trace-fst
+VERILATOR_ARGS = -Wno-fatal --binary
+
+ifeq ($(DUMP_WAVE), 1)
+VERILATOR_ARGS += --trace --trace-fst
+endif
 
 check:
 	@ghdl -v
