@@ -16,7 +16,7 @@ module neorv32_verilog_tb;
   // generator setup
   initial begin
     if (`DUMP_WAVE == 1) begin
-      $dumpfile("wave.vcd"); // write waveform data
+      $dumpfile("wave.fst"); // write waveform data
       $dumpvars();
     end
     $display ("neorv32-verilog verification testbench\n");

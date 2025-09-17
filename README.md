@@ -148,11 +148,11 @@ The simulator (Icarus Verilog or Verilator) will emit waveform data if the `DUMP
 neorv32-verilog$ make SIMULATOR=verilator DUMP_WAVE=1 sim
 ```
 
-The waveform dump file will be stored as `wave.vcd` in the repository's root directory.
+The waveform dump file will be stored as `wave.fst` in the repository's root directory.
 It can be viewed with GTKwave, for example:
 
 ```bash
-neorv32-verilog$ gtkwave wave.vcd
+neorv32-verilog$ gtkwave wave.fst
 ```
 
 > [!NOTE]
