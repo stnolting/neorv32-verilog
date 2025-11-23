@@ -38,29 +38,32 @@ begin
     -- Boot Configuration --
     BOOT_MODE_SELECT    => 0,           -- boot via internal bootloader
     -- On-Chip Debugger (OCD) --
-    OCD_EN              => true,        -- implement on-chip debugger
-    OCD_AUTHENTICATION  => true,        -- implement on-chip debugger authentication
+    OCD_EN              => true,        -- on-chip debugger
+    OCD_AUTHENTICATION  => true,        -- on-chip debugger authentication
     -- RISC-V CPU Extensions --
-    RISCV_ISA_C         => true,        -- implement compressed extension
-    RISCV_ISA_M         => true,        -- implement mul/div extension
-    RISCV_ISA_U         => true,        -- implement user mode extension
-    RISCV_ISA_Zaamo     => true,        -- implement atomic memory operations extension
-    RISCV_ISA_Zba       => true,        -- implement shifted-add bit-manipulation extension
-    RISCV_ISA_Zbb       => true,        -- implement basic bit-manipulation extension
-    RISCV_ISA_Zbkb      => true,        -- implement bit-manipulation instructions for cryptography
-    RISCV_ISA_Zbkc      => true,        -- implement carry-less multiplication instructions
-    RISCV_ISA_Zbkx      => true,        -- implement cryptography crossbar permutation extension
-    RISCV_ISA_Zbs       => true,        -- implement single-bit bit-manipulation extension
-    RISCV_ISA_Zfinx     => true,        -- implement 32-bit floating-point extension
-    RISCV_ISA_Zicntr    => true,        -- implement base counters
-    RISCV_ISA_Zicond    => true,        -- implement integer conditional operations
-    RISCV_ISA_Zihpm     => true,        -- implement hardware performance monitors
-    RISCV_ISA_Zknd      => true,        -- implement cryptography NIST AES decryption extension
-    RISCV_ISA_Zkne      => true,        -- implement cryptography NIST AES encryption extension
-    RISCV_ISA_Zknh      => true,        -- implement cryptography NIST hash extension
-    RISCV_ISA_Zksed     => true,        -- implement ShangMi block cipher extension
-    RISCV_ISA_Zksh      => true,        -- implement ShangMi hash extension
-    RISCV_ISA_Zxcfu     => true,        -- implement custom (instr.) functions unit
+    RISCV_ISA_C         => true,        -- compressed extension
+    RISCV_ISA_M         => true,        -- mul/div extension
+    RISCV_ISA_U         => true,        -- user mode extension
+    RISCV_ISA_Zalrsc    => true,        -- atomic reservation-set operations extension
+    RISCV_ISA_Zaamo     => true,        -- atomic memory operations extension
+    RISCV_ISA_Zba       => true,        -- shifted-add bit-manipulation extension
+    RISCV_ISA_Zbb       => true,        -- basic bit-manipulation extension
+    RISCV_ISA_Zbkb      => true,        -- bit-manipulation instructions for cryptography
+    RISCV_ISA_Zbkc      => true,        -- carry-less multiplication instructions
+    RISCV_ISA_Zbkx      => true,        -- cryptography crossbar permutation extension
+    RISCV_ISA_Zbs       => true,        -- single-bit bit-manipulation extension
+    RISCV_ISA_Zcb       => true,        -- additional code size reduction instructions
+    RISCV_ISA_Zfinx     => true,        -- 32-bit floating-point extension
+    RISCV_ISA_Zicntr    => true,        -- base counters
+    RISCV_ISA_Zicond    => true,        -- integer conditional operations
+    RISCV_ISA_Zihpm     => true,        -- hardware performance monitors
+    RISCV_ISA_Zimop     => true,        -- may-be-operations
+    RISCV_ISA_Zknd      => true,        -- cryptography NIST AES decryption extension
+    RISCV_ISA_Zkne      => true,        -- cryptography NIST AES encryption extension
+    RISCV_ISA_Zknh      => true,        -- cryptography NIST hash extension
+    RISCV_ISA_Zksed     => true,        -- ShangMi block cipher extension
+    RISCV_ISA_Zksh      => true,        -- ShangMi hash extension
+    RISCV_ISA_Zxcfu     => true,        -- custom (instr.) functions unit
     -- Tuning Options --
     CPU_FAST_MUL_EN     => true,        -- use DSPs for M extension's multiplier
     CPU_FAST_SHIFT_EN   => true,        -- use barrel shifter for shift operations
@@ -95,10 +98,10 @@ begin
     IO_SPI_EN           => true,        -- implement serial peripheral interface (SPI)?
     IO_TWI_EN           => true,        -- implement two-wire interface (TWI)?
     IO_TWD_EN           => true,        -- implement two-wire device (TWD)?
-    IO_PWM_NUM_CH       => 2,           -- number of PWM channels to implement (0..16)
+    IO_PWM_NUM          => 4,           -- number of PWM channels to implement (0..32)
     IO_WDT_EN           => true,        -- implement watch dog timer (WDT)?
     IO_NEOLED_EN        => true,        -- implement NeoPixel-compatible smart LED interface (NEOLED)?
-    IO_GPTMR_EN         => true,        -- implement general purpose timer (GPTMR)?
+    IO_GPTMR_NUM        => 4,           -- number of GPTMR slices to implement (0..16)
     IO_ONEWIRE_EN       => true,        -- implement 1-wire interface (ONEWIRE)?
     IO_DMA_EN           => true,        -- implement direct memory access controller (DMA)?
     IO_SLINK_EN         => true,        -- implement stream link interface (SLINK)?
