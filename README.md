@@ -1,3 +1,6 @@
+> [!Important]
+> **The Verilog conversion flow has been integrated into the main [NEORV32 repository](https://github.com/stnolting/neorv32).**
+
 # NEORV32 _in_ Verilog
 
 [![neorv32-verilog](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32-verilog/main.yml?branch=main&longCache=true&style=flat-square&label=neorv32-verilog%20check&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32-verilog/actions/workflows/main.yml)
